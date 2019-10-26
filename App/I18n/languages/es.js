@@ -1,0 +1,23 @@
+export default {
+    welcome: 'Bienvenido a la aplicación!',
+    camera: 'Cámara',
+    english: 'Inglés',
+    spanish: 'Español',
+    home: 'Inicio',
+    map: 'Mapa',
+    config: 'Configuración',
+    about: 'Acerca de',     
+    goToMap: 'Ir al mapa',
+    language: 'Idioma',
+    something: 'Algo',
+    popularTrails: 'Senderos populares',
+    places: 'Lugares',
+    trails: 'Senderos',
+    trail: 'Sendero',
+    difficulty: 'Dificultad',
+    aproxTime: 'Tiempo Aprox.',
+    selfGuided: 'Autoguiado',
+    seeTrail: 'Ver sendero',
+    sync: 'Sincronizar',
+    moreInfo: 'Más información'
+};
