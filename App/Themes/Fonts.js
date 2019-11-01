@@ -47,10 +47,6 @@ const style = {
     fontFamily: type.base,
     fontSize: size.regular
   },
-  description: {
-    fontFamily: type.base,
-    fontSize: size.medium
-  }
 }
 
 export default {

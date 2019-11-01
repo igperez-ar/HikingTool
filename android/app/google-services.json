@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1082269517246",
+    "firebase_url": "https://panal-developer.firebaseio.com",
+    "project_id": "panal-developer",
+    "storage_bucket": "panal-developer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082269517246:android:478c78e64c5f5dbb",
+        "android_client_info": {
+          "package_name": "com.panalsoft.developer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082269517246-uvasan4esgkfej4nh95g9a416sccnc9f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnLT69Txbx-wP5pmr8fwbPZllmCDyXcx8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082269517246-uvasan4esgkfej4nh95g9a416sccnc9f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1082269517246-74a0gstqih0h922r4vqa0bjhk056sg89.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.panalsoft.developer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

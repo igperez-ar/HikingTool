@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">SenderosIgnitePrueba</string>
+	  <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">rAXrHpvKmIoPEN2v633g-CW8NVFwSygH8Vf-V</string>
+    <string name="app_name">PanalDevApp</string>
+    <string name="default_notification_channel_id">MAIN_CHANNEL</string>
 </resources>
