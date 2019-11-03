@@ -1,20 +1,20 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation'
-import AnalyticsTestScreen from '../Containers/AnalyticsTestScreen'
-import LaunchScreen from '../Containers/LaunchScreen'
+import * as React from "react";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import routes from "./routes";
 
-import styles from './Styles/NavigationStyles'
+const routeConfig = {};
 
-// Manifest of possible screens
-const PrimaryNav = createStackNavigator({
-  'ANALYTICS_TEST': { screen: AnalyticsTestScreen },
-  'INICIO': { screen: LaunchScreen }
-}, {
-  // Default config for all screens
-  headerMode: 'none',
-  initialRouteName: 'INICIO',
-  navigationOptions: {
-    headerStyle: styles.header
+routes.map(route => {
+  routeConfig[route.name] = route.screen;
+});
+
+const MainStack = createStackNavigator(
+  {
+    ...routeConfig
+  },
+  {
+    headerMode: "none"
   }
-})
+);
 
-export default createAppContainer(PrimaryNav)
+export default createAppContainer(MainStack);

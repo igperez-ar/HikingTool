@@ -15,20 +15,3 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
-# react-native-fast-image@6.1.1
--keep public class com.dylanvann.fastimage.* {*;}
--keep public class com.dylanvann.fastimage.** {*;}
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.module.AppGlideModule
--keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
-}
-
-# react-native-config
--keep class com.panalsoft.developer.BuildConfig { *; }
-
-# react-native-firebase
--keep class io.invertase.firebase.** { *; }
--dontwarn io.invertase.firebase.**
