@@ -30,7 +30,7 @@ export default {
    spanish: 'Spanish',
    home: 'Home',
    map: 'Map',
-   config: 'Configuration',
+   settings: 'Settings',
    about: 'About',
    goToMap: 'Go to map',
    popularTrails: 'Popular trails',
@@ -42,5 +42,7 @@ export default {
    selfGuided: 'Self guided',
    seeTrail: 'See trail',
    sync: 'Synchronize',
-   moreInfo: 'More information'
+   moreInfo: 'More information',
+   weather: 'Weather',
+   popularTrails: 'Popular Trails',
 };

@@ -1,92 +1,68 @@
-import React from 'react';
+import React, { Component } from 'react'
 import {
     ScrollView,
-    StyleSheet,
     Text,
     Button,
-    Image,
-    Dimensions
-} from 'react-native';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { navigateTo } from '../Redux/actions';
-import I18n from '../I18n/i18n';
-import { Card, Icon } from 'react-native-elements'
+    Image
+} from 'react-native'
+import styles from './Styles/HomeStyles'
+import { connect } from 'react-redux'
+import { navigateTo } from '../Redux/actions'
+import I18n from '../I18n/i18n'
+import { Card } from 'react-native-elements'
 
-const Home = ({ activeRoute, navigateTo }) => (
-  <ScrollView>
-    <Text style={styles.header1}>Senderos Populares</Text>
-    
-    <ScrollView horizontal={true} contentContainerStyle={styles.row}>
-      <Card title={ I18n.t('trail') } style={styles.card}>
-        <Image
-          style={styles.image}
-          source={{uri: 'https://placeimg.com/640/480/nature'}}
-        />
-        <Button
-          title={ I18n.t('goToMap') } 
-          onPress={ () => navigateTo('map') }/>
-      </Card>
+class Home extends Component  {
 
-      <Card title={ I18n.t('trail') } style={styles.card}>
-        <Image
-          style={styles.image}
-          source={{uri: 'https://placeimg.com/640/480/nature'}}
-          />
-        <Button
-          title={ I18n.t('goToMap') } 
-          onPress={ () => navigateTo('map') }/>
-      </Card>
+  async componentDidMount() {
+    if (!this.props.language === null) {
+      I18n.locale = this.props.language;
+    }
+  }
 
-      <Card title={ I18n.t('trail') } style={styles.card}>
-        <Image
-          style={styles.image}
-          source={{uri: 'https://placeimg.com/640/480/nature'}}
-        />
-        <Button
-          title={ I18n.t('goToMap') } 
-          onPress={ () => navigateTo('map') }/>
-      </Card>
-    </ScrollView>
-  </ScrollView>
-);
+  render( activeRoute, navigateTo ) {
+    return (
+      <ScrollView>
+        <Text style={styles.header1}>{I18n.t('popularTrails')}</Text>
+        
+        <ScrollView horizontal={true} contentContainerStyle={styles.row}>
+          <Card title={ I18n.t('trail') } style={styles.card}>
+            <Image
+              style={styles.image}
+              source={{uri: 'https://placeimg.com/640/480/nature'}}
+            />
+            <Button
+              title={ I18n.t('goToMap') } 
+              onPress={ () => navigateTo('map') }/>
+          </Card>
 
-Home.propTypes = {
-  activeRoute: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    screen: PropTypes.any.isRequired,
-    icon: PropTypes.string.isRequired,
-  }).isRequired,
-  navigateTo: PropTypes.func.isRequired,
-};
+          <Card title={ I18n.t('trail') } style={styles.card}>
+            <Image
+              style={styles.image}
+              source={{uri: 'https://placeimg.com/640/480/nature'}}
+              />
+            <Button
+              title={ I18n.t('goToMap') } 
+              onPress={ () => console.warn(this.props) }/>
+          </Card>
 
-const styles = StyleSheet.create({
-  row: {
-    marginBottom: 20
-  },
-  card: {
-    
-  },
-  image: {
-    width: Dimensions.get('window').width - 60,
-    height: 200,
-    marginBottom: 20
-  },
-  header1: {
-      fontSize: 28,
-      margin: 15,
-  },
-  text: {
-      fontSize: 20,
-      width: '70%',
-      textAlign: 'center',
-      lineHeight: 30,
-      marginBottom: '4%',
-  },
-});
+          <Card title={ I18n.t('trail') } style={styles.card}>
+            <Image
+              style={styles.image}
+              source={{uri: 'https://placeimg.com/640/480/nature'}}
+            />
+            <Button
+              title={ I18n.t('goToMap') } 
+              onPress={ () => console.warn(this.props.language) }/>
+          </Card>
+        </ScrollView>
+      </ScrollView>
+      )
+    }
+}
 
 const mapStateToProps = state => ({
   activeRoute: state.routes.activeRoute,
+  language: state.settings.data.language,
 });
 
 const mapDispatchToProps = dispatch => ({

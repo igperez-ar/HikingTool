@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: bgHeader,
     height: 80, // 56dp AppBar height plus 24dp correction for the StatusBar translucent
-    paddingTop: 24 // StatusBar's height
+    paddingTop: 24, // StatusBar's height
   }
 });
 

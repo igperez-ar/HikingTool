@@ -5,7 +5,7 @@ export default {
     spanish: 'Español',
     home: 'Inicio',
     map: 'Mapa',
-    config: 'Configuración',
+    settings: 'Configuración',
     about: 'Acerca de',     
     goToMap: 'Ir al mapa',
     language: 'Idioma',
@@ -19,5 +19,7 @@ export default {
     selfGuided: 'Autoguiado',
     seeTrail: 'Ver sendero',
     sync: 'Sincronizar',
-    moreInfo: 'Más información'
+    moreInfo: 'Más información',
+    weather: 'Clima',
+    popularTrails: 'Senderos Populares',
 };

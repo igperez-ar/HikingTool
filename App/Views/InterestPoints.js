@@ -3,13 +3,13 @@ import {
   Text, 
   View, 
   ScrollView, 
-  Button,
-  StyleSheet, 
+  Button, 
   Image 
 } from 'react-native'
+import styles from './Styles/InterestPointsStyles'
 
 
-class PointsOfInterest extends Component {
+class InterestPoints extends Component {
 
     render () {
       return (
@@ -30,25 +30,4 @@ class PointsOfInterest extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  titulo: {
-    fontSize: 28,
-    color: 'black',
-    alignSelf: "center",
-    padding: 15,
-    fontWeight: 'bold',
-  },
-  image_container: {
-    padding: 5,
-  },
-  image: {
-    width: null,
-    resizeMode: 'contain',
-    height: 300
-  }
-});
-
-export default PointsOfInterest;
+export default InterestPoints;

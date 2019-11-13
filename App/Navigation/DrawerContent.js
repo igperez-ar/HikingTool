@@ -26,7 +26,7 @@ const DrawerContent = ({ navigateTo, activeRoute, routes, closeDrawer }) => (
   <ScrollView>
     <View style={styles.header}>
       <ImageBackground source={require('../Images/1.jpg')} style={StyleSheet.absoluteFillObject} resizeMode='cover'>
-        <Text style={styles.title}>Senderos</Text>
+        <Text style={styles.title}>HikingTool</Text>
       </ImageBackground>
       <View style={styles.overlay} />
     </View>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.3)'
   },
   title: {
-    marginTop: '35%',
+    marginTop: '34%',
     marginLeft: 5,
     fontSize: 50,
     color: 'white',

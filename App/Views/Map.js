@@ -1,28 +1,28 @@
 import React, { Component } from 'react'
+import { View } from 'react-native-animatable'
 import {
-  View,
-  StyleSheet,
-  Dimensions,
+  /* View, */
   Button,
   PermissionsAndroid,
   TouchableOpacity,
   Picker,
+  Text,
+  ScrollView,
   Image
 } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
-import { Card } from 'react-native-elements';
+MapboxGL.setAccessToken("pk.eyJ1Ijoic2VuZGVyb3MiLCJhIjoiY2swdmR3OGgzMHk0ODNtcXM5ZzVzbng1aSJ9.aPqBLjTycTdR-4gMbpSM8w");
+import { Card, Divider } from 'react-native-elements';
 import I18n from '../I18n/i18n';
-import OptionIcon from 'react-native-vector-icons/Ionicons'
+import styles from './Styles/MapStyles'
 
+import OptionIcon from 'react-native-vector-icons/Ionicons'
 import Marker from '../Images/Icons/map-marker.png';
 
 import SenderosGeoJSON from '../Geo/senderos-pn-tdf.json';
+/* import SenderosGeoJSON from '../Geo/newtrails-pn-tdf.json'; */
 import PuntosInteresGeoJSON from '../Geo/puntos_interes-pn-tdf.json';
 
-const windowWidth= Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-MapboxGL.setAccessToken("pk.eyJ1Ijoic2VuZGVyb3MiLCJhIjoiY2swdmR3OGgzMHk0ODNtcXM5ZzVzbng1aSJ9.aPqBLjTycTdR-4gMbpSM8w");
 
 export default class Map extends Component {
 
@@ -38,9 +38,8 @@ export default class Map extends Component {
       showCard: false,
       cardData: null,
       showFilters: false,
-      selectedIndex: 2,
-      trail:'Todos',
-      layer: 'Todas'
+      trail: 0,
+      layer: 0
     };
   }
 
@@ -80,34 +79,35 @@ export default class Map extends Component {
   }
 
   updateIndex(selectedIndex) {
-    switch (selectedIndex) {
-      case 'Todas':
+    switch(selectedIndex) {
+      case 0:
         this.setState({
           showTrails: true,
           showInterestPoints: true,
           layer: selectedIndex
-        })
-      break;
-      case 'Senderos':
+        });
+        break;
+      case 1:
         this.setState({
-          showTrails: false,
+          showTrails: true,
           showInterestPoints: false,
           layer: selectedIndex
-        })
-      break;
-      case 'Puntos de Interes':
+        });
+        break;
+      case 2:
         this.setState({
-          showTrails: true,
+          showTrails: false,
           showInterestPoints: true,
           layer: selectedIndex
-        })
-      break;
+        });
+        break;
     }
   }
 
   onMapPress() {
     this.setState({
-      showCard: false
+      showCard: false,
+      showFilters: false
     });
   }
 
@@ -115,32 +115,42 @@ export default class Map extends Component {
     const feature = e.nativeEvent.payload;
     this.setState({
       cardData: feature,
-      showCard: true
+      showCard: true,
+      showFilters: false
     });
   }
 
   onFiltersBtnPress() {
     this.setState(prevState => ({
-      showFilters: !prevState.showFilters
+      showFilters: !prevState.showFilters,
+      showCard: false
     }));
   }
 
   renderCard() {
     if (this.state.showCard)
       return ( 
-        <Card 
-          title={this.state.cardData.properties.Name} 
-          containerStyle={styles.card}
-        >
+        <View animation="slideInUp" style={styles.detailsContainer}>
+          <TouchableOpacity
+            style={styles.closeFiltersButton}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+            onPress={this.onFiltersBtnPress}
+          >
+            <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
+          </TouchableOpacity> 
+          
+          <Text style={styles.detailsTitle}>
+            {this.state.cardData.properties.Name}
+          </Text>
+          <Divider style={styles.divider}/>
           <Image
             style={styles.image}
             source={{uri: 'https://placeimg.com/640/480/nature'}}
           />
           <Button 
             title={I18n.t('moreInfo')}
-            //todavía sin funcionalidad
           />
-        </Card> 
+        </View>
       );
 
     return null;
@@ -155,37 +165,38 @@ export default class Map extends Component {
               hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
               onPress={this.onFiltersBtnPress}
             >
-              <Text>X</Text>
+              <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
             </TouchableOpacity>
-            <View style={{margin: 10, flex: 1}}>
-              <Text style={styles.titulo}>Filtros</Text>
-              <ScrollView>
-                <Text style={{paddingTop: 30}}>Senderos:</Text>
+            <Text style={styles.filtersTitle}>Filtros</Text>
+            <Divider style={styles.divider}/>
+            <View style={{alignSelf: "center", paddingVertical:'9%'}}>
+              <Text>Senderos:</Text>
+              <View style={styles.picker}>
                 <Picker
                   selectedValue={this.state.trail}
-                  style={{height: 50, width: '90%'}}
                   onValueChange={(itemValue) =>
-                    this.setState({showTrails: true, trail: itemValue, layer: 'Senderos', showInterestPoints: false})
+                    this.setState({showTrails: true, trail: itemValue})
                   }>
-                  <Picker.Item label="Todos" value="Todos" />
+                  <Picker.Item label="Todos" value={0} />
                   {
                     SenderosGeoJSON.features.map((item) =>{
                       return(
-                      <Picker.Item  label={item.properties.Name} value={item.properties.Name} key={null}/>
+                      <Picker.Item label={item.properties.name} value={item.properties.id} key={null}/>
                       );
                     })
                   }
                 </Picker>
-                <Text style={{paddingTop: 30}}>Capas:</Text>
+              </View>
+              <Text style={{paddingTop: 30}}>Capas:</Text>
+              <View style={styles.picker}>
                 <Picker
                   selectedValue={this.state.layer}
-                  style={{height: 50, width: '90%'}}
                   onValueChange={(itemValue) => this.updateIndex(itemValue)}>
-                  <Picker.Item label="Todas" value="Todas"/>
-                  <Picker.Item label="Senderos" value="Senderos"/>
-                  <Picker.Item label="Puntos de Interes" value="Puntos de Interes"/>
+                  <Picker.Item label="Todas" value={0}/>
+                  <Picker.Item label="Senderos" value={1}/>
+                  <Picker.Item label="Puntos de Interes" value={2}/>
                 </Picker>
-              </ScrollView>
+              </View>
             </View>
           </View>
       );
@@ -194,7 +205,7 @@ export default class Map extends Component {
 
   render() {
     return (
-      <View style={styles.view}>
+      <View style={styles.container}>
         <MapboxGL.MapView
           onPress={this.onMapPress}
           style={styles.map}
@@ -217,7 +228,7 @@ export default class Map extends Component {
             <MapboxGL.LineLayer
               id="senderos-pn-tdf"
               style={{ lineColor: 'brown', lineWidth: 3, visibility: 'visible' }}
-              filter={this.state.showTrails ? (this.state.trail == 'Todos' ? ['all'] : ['==', 'Name', this.state.trail]) : ['==', 'Name', 'NoName']}
+              filter={this.state.showTrails ? (this.state.trail == 0 ? ['all'] : ['==', 'id', this.state.trail]) : ['==', 'id', 0]}
             />
           </MapboxGL.ShapeSource>
           <MapboxGL.ShapeSource 
@@ -238,7 +249,8 @@ export default class Map extends Component {
         {this.renderCard()}
 
         <TouchableOpacity 
-          style={styles.optionsButton}
+          style={[styles.optionsButton, {bottom: this.state.showFilters > this.state.showCard ? 310 : 
+                                                 this.state.showCard ? 250 : 15}]}
           onPress={this.onFiltersBtnPress}
         >
           <OptionIcon name="md-options" style={{ fontSize: 35 }}/>
@@ -251,36 +263,3 @@ export default class Map extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  view: {
-    flex: 1
-  },
-  card: {
-    position: "absolute",
-    bottom: 0,
-    alignSelf: "center",
-    borderTopStartRadius: 20,
-    borderTopEndRadius: 20,
-    width: '95%'
-  },
-  image: {
-    width: '100%',
-    height: 100,
-    marginBottom: 20
-  },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
-  header1: {
-    fontSize: 24,
-    marginBottom: '20%',
-  },
-  text: {
-    fontSize: 20,
-    width: '70%',
-    textAlign: 'center',
-    lineHeight: 30,
-    marginBottom: '20%',
-  },
-});

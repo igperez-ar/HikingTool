@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import { 
   Text,
-  StyleSheet,
   Image
-} from 'react-native';
-import { Card } from 'react-native-elements';
+} from 'react-native'
+import styles from './Styles/TrailStyles'
+import { Card } from 'react-native-elements'
 
 class Trail extends React.Component {
     /* componentDidMount() {
@@ -33,25 +33,5 @@ class Trail extends React.Component {
       );
     }
 }
-
-const styles = StyleSheet.create({
-  titulo: {
-    fontSize: 14,
-    alignSelf: "flex-start",
-    color: 'black',
-    paddingVertical: 5,
-    fontWeight: 'bold',
-  },
-  descripcion: {
-    fontSize: 13,
-    color: 'black',
-    marginBottom: 10,
-  },
-  image: {
-    width: '100%', 
-    height: 150,
-    marginBottom: 10
-  }
-});
 
 export default Trail;

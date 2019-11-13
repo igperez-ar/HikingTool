@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 import { 
   View,
-  StyleSheet, 
   ListView, 
   Text, 
   Button, 
   ActivityIndicator,
   Image 
-} from 'react-native';
-import { Card } from 'react-native-elements';
-import I18n from '../I18n/i18n';
-import trailsAPI from '../Services/SenderoApi';
+} from 'react-native'
+import styles from './Styles/TrailListStyles'
+import { Card } from 'react-native-elements'
+import I18n from '../I18n/i18n'
+import trailsAPI from '../Services/SenderoApi'
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -84,24 +84,3 @@ export default class TrailList extends React.Component {
       );
     } 
 }
-
-const styles = StyleSheet.create({
-  image: {
-    width: '35%',
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: 'grey',
-    marginRight: 20
-  },
-  content: {
-    flex: 1,
-    paddingLeft: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  text: {
-    marginBottom: 10
-  }
-});
