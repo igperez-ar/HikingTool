@@ -53,7 +53,7 @@ export default class TrailList extends React.Component {
             />
             <View>
               <Text>{I18n.t('difficulty')}: {rowData.dificultad}</Text>
-              <Text>{I18n.t('aproxTime')}: {rowData.ida_hr}min</Text>
+              <Text>{I18n.t('aproxTime')}:  {rowData.ida_hr}min</Text>
               <Text>{I18n.t('selfGuided')}: {rowData.autoguiado === 0 ? 'No' : 'Si'}</Text>
             </View>
           </View>

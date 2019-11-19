@@ -7,8 +7,7 @@ import {
   StatusBar,
   DrawerLayoutAndroid,
 } from 'react-native';
-import createStore from './App/Redux';
-import { persistStore } from 'redux-persist';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './App/Redux/reducers';
 import { setNavigator, setActiveRoute } from "./App/Redux/actions";
@@ -17,7 +16,7 @@ import Toolbar from './App/Navigation/Toolbar';
 import AppNavigation from './App/Navigation/AppNavigation';
 import { bgStatusBar, bgDrawer } from './App/global.styles';
 
-let store = createStore();
+let store = createStore(reducer);
 /* getDrawerWidth       Default drawer width is screen width - header width
 * https://material.io/guidelines/patterns/navigation-drawer.html
 */
