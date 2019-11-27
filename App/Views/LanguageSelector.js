@@ -26,14 +26,14 @@ const languages = [
 ];
 
 class LanguageSelector extends React.Component {
+  
+  static navigationOptions = {
+    title: I18n.t('settings')
+  };
 
   constructor(props) {
     super(props);
   }
-
-  /* static navigationOptions = {
-    title: 'Settings'
-  }; */
 
   handleSubmit = (locale) => {
     I18n.locale = locale;
@@ -60,8 +60,9 @@ class LanguageSelector extends React.Component {
   }
 
   render() {
-    const currentLocale = this.props.navigation.getParam('currentLocale');
-    const lang = this.props.settings.language;
+    /* console.warn(this.props) */
+    /* const currentLocale = this.props.navigation.getParam('currentLocale'); */
+    const currentLocale = this.props.language;
 
     return (
 
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
 /* export default LanguageSelector; */
 
 const mapStateToProps = state => ({
-  settings: state.settings.language
+  language: state.settings.language
 });
  
 const mapDispatchToProps = (dispatch) => ({

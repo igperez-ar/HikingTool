@@ -10,6 +10,7 @@ import {
   createDrawerNavigator, 
   createAppContainer 
 } from 'react-navigation';
+import { bgHeader } from '../global.styles';
 
 import HomeScreen from '../Views/Home';
 import MapScreen from '../Views/Map';
@@ -21,7 +22,7 @@ import SettingsScreen from '../Views/Settings';
 import LanguageSelectorScreen from '../Views/LanguageSelector';
 import AboutScreen from '../Views/About';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SideMenu from './SideMenu';
 import I18n from '../I18n/i18n';
 
@@ -30,11 +31,26 @@ class NavigationDrawerStructure extends Component {
   toggleDrawer = () => {
     this.props.navigationProps.toggleDrawer();
   };
+  
+  goBack = () => {
+    this.props.navigationProps.goBack();
+  };
+
   render() {
     return (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
-          <Text style={{ paddingHorizontal: 8 }}><Icon name="menu" style={{ fontSize: 30 }} /></Text>
+        <TouchableOpacity 
+          style={{ paddingLeft: 14 }}
+          onPress={ this.props.navigationProps.state.routeName === 'home' ? 
+                    this.toggleDrawer.bind(this) : 
+                    this.goBack.bind(this) }
+        >
+          <Text>
+            <Icon 
+              name={this.props.navigationProps.state.routeName === 'home' ? "menu" : "arrow-left"} 
+              style={{ fontSize: 30 }} 
+            />
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -46,10 +62,133 @@ const MainStack = createStackNavigator({
   home: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }) => ({
+      title: I18n.t('home'),
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  map: {
+    screen: MapScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Mapa',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  trailist: {
+    screen: TrailListScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Senderos',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  trail: {
+    screen: TrailScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Sendero',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  camera: {
+    screen: CameraScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Camara',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  weather: {
+    screen: WeatherScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Clima',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  settings: {
+    screen: SettingsScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Ajustes',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  lang: {
+    screen: LanguageSelectorScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Ajustes',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  about: {
+    screen: AboutScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Clima',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
+const Drawer = createDrawerNavigator(
+  {
+    home: {screen: MainStack},
+  },
+  {
+    contentComponent: SideMenu,
+    drawerWidth: Dimensions.get('window').width - 70, 
+  },
+);
+
+export default createAppContainer(Drawer);
+
+/* const MainStack = createStackNavigator({
+  //All the screen from the First Option will be indexed here
+  home: {
+    screen: HomeScreen,
+    navigationOptions: ({ navigation }) => ({
       title: 'Inicio',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -66,7 +205,7 @@ const StackScreen2 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -82,7 +221,7 @@ const StackScreen3 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -94,7 +233,7 @@ const StackScreen3 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -110,7 +249,7 @@ const StackScreen4 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -126,7 +265,7 @@ const StackScreen5 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -142,7 +281,7 @@ const StackScreen6 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -154,7 +293,7 @@ const StackScreen6 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -170,7 +309,7 @@ const StackScreen7 = createStackNavigator({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
  
       headerStyle: {
-        backgroundColor: '#2ECC40',
+        backgroundColor: bgHeader,
       },
       headerTintColor: '#fff',
     }),
@@ -193,4 +332,4 @@ const Drawer = createDrawerNavigator(
     drawerWidth: Dimensions.get('window').width - 120, 
   },
 );
-export default createAppContainer(Drawer);
+export default createAppContainer(Drawer); */

@@ -81,43 +81,8 @@ const settings = [
 
 
 class Settings extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { name: '', locale: 'es' }
-
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  static navigationOptions = {
-    title: I18n.t('settings')
-  };
-
-  async componentDidMount() {
-    /* const initialState = await loadSettings();
-
-    this.setState(initialState); */
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const locale = this.props.navigation.getParam('locale', null);
-    if (locale && prevState.locale !== locale) {
-      I18n.locale = locale;
-      this.setState({ locale });
-    }
-  }
-
-  handleNameChange(name) {
-    this.setState({ name });
-  }
-
-  handleSubmit() {
-    saveSettings(this.state);
-  }
 
   render() {
-    const currentLocale = this.state.locale;
     const { navigate } = this.props.navigation;
 
     return (
@@ -126,7 +91,7 @@ class Settings extends React.Component {
           settings.map((item) => [
             <TouchableOpacity
                 key={item.name}
-                onPress={() => navigate('lang', {currentLocale})}
+                onPress={() => navigate('lang')}
             > 
               <ListItem
                   title={I18n.t(item.name)}

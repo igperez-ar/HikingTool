@@ -12,10 +12,13 @@ import { Card } from 'react-native-elements';
 
 class Home extends Component  {
 
+  /* static navigationOptions = {
+    title: I18n.t('home')
+  }; */
+
   render() {
-    /* const { navigate } = this.props.navigation; */
-    console.warn(this.props.language);
     I18n.locale = this.props.language;
+
     return (
       <ScrollView>
         <Text style={styles.header1}>{I18n.t('popularTrails')}</Text>
