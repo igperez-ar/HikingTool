@@ -12,7 +12,6 @@
    "forgotPassword": "Forgot Password",
    "username": "Username",
    "password": "Password",
-   "cancel": "Cancel",
    "welcome": "Welcome to the app!",
    "login": "Login",
    "tempIndicator": "F",
@@ -43,5 +42,9 @@
    "seeTrail": "See trail",
    "sync": "Synchronize",
    "moreInfo": "More information",
-   "weather": "Weather"
+   "weather": "Weather",
+   "lang": "Languages",
+   "change_language": "Change language?",
+   "cancel": "Cancel",
+   "accept": "Accept"
 }

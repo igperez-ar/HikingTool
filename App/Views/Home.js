@@ -1,25 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
     ScrollView,
     Text,
     Button,
     Image
-} from 'react-native'
-import styles from './Styles/HomeStyles'
-import { connect } from 'react-redux'
-import { navigateTo } from '../Redux/actions'
-import I18n from '../I18n/i18n'
-import { Card } from 'react-native-elements'
+} from 'react-native';
+import styles from './Styles/HomeStyles';
+import { connect } from 'react-redux';
+import I18n from '../I18n/i18n';
+import { Card } from 'react-native-elements';
 
 class Home extends Component  {
 
-  async componentDidMount() {
-    if (!this.props.language === null) {
-      I18n.locale = this.props.language;
-    }
-  }
-
-  render( activeRoute, navigateTo ) {
+  render() {
+    /* const { navigate } = this.props.navigation; */
+    console.warn(this.props.language);
+    I18n.locale = this.props.language;
     return (
       <ScrollView>
         <Text style={styles.header1}>{I18n.t('popularTrails')}</Text>
@@ -32,7 +28,7 @@ class Home extends Component  {
             />
             <Button
               title={ I18n.t('goToMap') } 
-              onPress={ () => navigateTo('map') }/>
+              onPress={ () => this.props.navigateTo('map') }/>
           </Card>
 
           <Card title={ I18n.t('trail') } style={styles.card}>
@@ -42,7 +38,7 @@ class Home extends Component  {
               />
             <Button
               title={ I18n.t('goToMap') } 
-              onPress={ () => console.warn(this.props) }/>
+              onPress={ () => this.props.navigateTo('map') }/>
           </Card>
 
           <Card title={ I18n.t('trail') } style={styles.card}>
@@ -52,7 +48,7 @@ class Home extends Component  {
             />
             <Button
               title={ I18n.t('goToMap') } 
-              onPress={ () => console.warn(this.props.language) }/>
+              onPress={ () => this.props.navigateTo('map') }/>
           </Card>
         </ScrollView>
       </ScrollView>
@@ -61,13 +57,13 @@ class Home extends Component  {
 }
 
 const mapStateToProps = state => ({
-  activeRoute: state.routes.activeRoute,
-  language: state.settings.data.language,
+  language: state.settings.language,
 });
 
 const mapDispatchToProps = dispatch => ({
   navigateTo: routeName => { dispatch(navigateTo(routeName)); },
 });
+
 
 export default connect(
   mapStateToProps,

@@ -20,5 +20,9 @@
     "seeTrail": "Ver sendero",
     "sync": "Sincronizar",
     "moreInfo": "Más información",
-    "weather": "Clima"
+    "weather": "Clima",
+    "lang": "Idiomas",
+    "change_language": "Cambiar el idioma?",
+    "cancel": "Cancelar",
+    "accept": "Aceptar"
 }

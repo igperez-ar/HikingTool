@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     container: {
@@ -20,4 +20,13 @@ export default StyleSheet.create({
       alignSelf: 'center',
       margin: 20,
     },
+    cancel: {
+      position: 'absolute',
+      right: 20,
+      top: 20,
+      backgroundColor: 'transparent',
+      color: '#FFF',
+      fontWeight: '600',
+      fontSize: 17,
+    }
 })

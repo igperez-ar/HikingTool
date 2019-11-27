@@ -55,20 +55,29 @@ export default connect(
 
 import React from 'react';
 import {
-  Keyboard,
   StyleSheet,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
   Button
 } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { ListItem } from 'react-native-elements';
 import I18n from '../I18n/i18n';
 
-import LanguageSelector from './LanguageSelector';
-import SettingsList from '../Components/SettingsList';
+
+const settings = [
+  {
+    name: 'language',
+    icon: 'language',
+    screen: 'lang'
+  },
+  {
+    name: 'weather',
+    icon: 'cloud',
+    screen: 'weather'
+  }
+];
 
 
 class Settings extends React.Component {
@@ -112,21 +121,29 @@ class Settings extends React.Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <ScrollView style={{ flex: 1, flexDirection: 'column' }}>
-        <SettingsList
-          onPressItem={(screen) => navigate('lang', { currentLocale })}
-        />
+      <ScrollView>
+        {
+          settings.map((item) => [
+            <TouchableOpacity
+                key={item.name}
+                onPress={() => navigate('lang', {currentLocale})}
+            > 
+              <ListItem
+                  title={I18n.t(item.name)}
+                  leftIcon={{ name: item.icon }}
+                  /* badge={{ value: item.state }} */
+                  bottomDivider
+                  chevron
+              />
+            </TouchableOpacity>
+          ])
+        }
       </ScrollView>
     );
   }
 }
 
-const SettingsNavigator = createStackNavigator({
-  Settings: Settings,
-  LanguageSelector: LanguageSelector
-});
-
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 45
@@ -143,6 +160,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20
   }
-});
+}); */
 
 export default Settings;

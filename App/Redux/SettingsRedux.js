@@ -1,32 +1,35 @@
-import { createReducer, createActions } from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import { createReducer, createActions } from 'reduxsauce';
+import Immutable from 'seamless-immutable';
 
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  settingsRequest: ['data'],
-  settingsSuccess: ['payload'],
-  settingsFailure: null
+  languageRequest: ['data'],
+  languageSuccess: ['payload'],
+  languageFailure: null,
+  //
+  //valores posibles por ahora: [es, en]
+  changeLanguage: ['lang'],
 })
 
-export const SettingsTypes = Types
+export const LanguageTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  data: {
-    language: null,
-  },
+  data: null,
   fetching: null,
   payload: null,
-  error: null
+  error: null,
+  //
+  language: 'en',
 })
 
 /* ------------- Selectors ------------- */
 
-export const SettingsSelectors = {
-  getData: state => state.data
+export const LanguageSelectors = {
+  getLanguage: state => state.language
 }
 
 /* ------------- Reducers ------------- */
@@ -37,19 +40,25 @@ export const request = (state, { data }) =>
 
 // successful api lookup
 export const success = (state, action) => {
-  const { payload } = action.payload
-
-  return state.merge({ fetching: false, error: null, data: payload })
+  const { payload } = action
+  return state.merge({ fetching: false, error: null, payload })
 }
 
 // Something went wrong somewhere.
 export const failure = state =>
   state.merge({ fetching: false, error: true, payload: null })
 
+//
+export const changeLanguage = (state, { lang }) => {
+  return state.merge({ language: lang })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SETTINGS_REQUEST]: request,
-  [Types.SETTINGS_SUCCESS]: success,
-  [Types.SETTINGS_FAILURE]: failure
+  [Types.LANGUAGE_REQUEST]: request,
+  [Types.LANGUAGE_SUCCESS]: success,
+  [Types.LANGUAGE_FAILURE]: failure,
+  //
+  [Types.CHANGE_LANGUAGE]: changeLanguage,
 })

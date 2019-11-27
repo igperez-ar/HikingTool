@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native-animatable'
 import {
-  /* View, */
   Button,
   PermissionsAndroid,
   TouchableOpacity,
@@ -12,16 +11,16 @@ import {
 } from 'react-native';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 MapboxGL.setAccessToken("pk.eyJ1Ijoic2VuZGVyb3MiLCJhIjoiY2swdmR3OGgzMHk0ODNtcXM5ZzVzbng1aSJ9.aPqBLjTycTdR-4gMbpSM8w");
-import { Card, Divider } from 'react-native-elements';
+import { Divider } from 'react-native-elements';
 import I18n from '../I18n/i18n';
 import styles from './Styles/MapStyles'
 
 import OptionIcon from 'react-native-vector-icons/Ionicons'
 import Marker from '../Images/Icons/map-marker.png';
 
-import SenderosGeoJSON from '../Geo/senderos-pn-tdf.json';
-/* import SenderosGeoJSON from '../Geo/newtrails-pn-tdf.json'; */
-import PuntosInteresGeoJSON from '../Geo/puntos_interes-pn-tdf.json';
+import SenderosGeoJSON from '../Jsons/senderos-pn-tdf.json';
+/* import SenderosGeoJSON from '../Jsons/newtrails-pn-tdf.json'; */
+import PuntosInteresGeoJSON from '../Jsons/puntos-interes-pn-tdf.json';
 
 
 export default class Map extends Component {

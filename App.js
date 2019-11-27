@@ -1,4 +1,35 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import RootContainer from './App/Views/RootContainer';
+import createStore from './App/Redux';
+
+// create our store
+const store = createStore()
+
+/**
+ * Provides an entry point into our application.  Both index.ios.js and index.android.js
+ * call this component first.
+ *
+ * We create our Redux store here, put it into a provider and then bring in our
+ * RootContainer.
+ *
+ * We separate like this to play nice with React Native's hot reloading.
+ */
+class App extends Component {
+  render () {
+    return (
+      <Provider store={store}>
+        <RootContainer />
+      </Provider>
+    )
+  }
+}
+
+// allow reactotron overlay for fast design in dev mode
+export default App;
+
+
+/* import React, {Component} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -7,19 +38,30 @@ import {
   StatusBar,
   DrawerLayoutAndroid,
 } from 'react-native';
-import { createStore } from 'redux';
+//import { createStore } from 'redux';
+import createStore from './App/Redux';
 import { Provider } from 'react-redux';
-import reducer from './App/Redux/reducers';
+//import reducer from './App/Redux/reducers';
 import { setNavigator, setActiveRoute } from "./App/Redux/actions";
 import DrawerContent from './App/Navigation/DrawerContent';
 import Toolbar from './App/Navigation/Toolbar';
 import AppNavigation from './App/Navigation/AppNavigation';
 import { bgStatusBar, bgDrawer } from './App/global.styles';
+import { createReactNavigationReduxMiddleware, createReduxContainer } from 'react-navigation-redux-helpers';
 
-let store = createStore(reducer);
-/* getDrawerWidth       Default drawer width is screen width - header width
-* https://material.io/guidelines/patterns/navigation-drawer.html
-*/
+//let store = createStore(reducer);
+const store = createStore();
+
+export const appNavigatorMiddleware = createReactNavigationReduxMiddleware(
+  (state) => state.nav,
+  'root'
+)
+
+const ReduxAppNavigator = createReduxContainer(AppNavigation, 'root')
+
+//getDrawerWidth       Default drawer width is screen width - header width
+// https://material.io/guidelines/patterns/navigation-drawer.html
+
 const getDrawerWidth = () => Dimensions.get('window').width - (Platform.OS === 'android' ? 56 : 64);
 
 export default class App extends Component {
@@ -55,6 +97,7 @@ export default class App extends Component {
   };
 
   render() {
+    
     return (
       <Provider store={store}>
         <DrawerLayoutAndroid
@@ -67,13 +110,14 @@ export default class App extends Component {
           ref={this.drawer}
         >
           <View style={styles.container}>
+            {console.warn(this.props)}
             <StatusBar
                 translucent
                 backgroundColor={bgStatusBar}
                 animated
             />
             <Toolbar showMenu={this.openDrawer} />
-            <AppNavigation
+            <ReduxAppNavigator
               onNavigationStateChange={(prevState, currentState) => {
                 const currentScreen = this.getActiveRouteName(currentState);
                 store.dispatch(setActiveRoute(currentScreen));
@@ -93,3 +137,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
 });
+ */
