@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import StartupActions from '../Redux/StartupRedux';
 import ReduxPersist from '../Config/ReduxPersist';
 
+import I18n from '../I18n/i18n';
+
 // Styles
 import styles from './Styles/RootContainerStyles';
 
@@ -17,6 +19,8 @@ class RootContainer extends Component {
   }
 
   render () {
+    I18n.locale = this.props.language;
+
     return (
       <View style={styles.applicationView}>
         <StatusBar barStyle='light-content' />
@@ -26,13 +30,17 @@ class RootContainer extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  language: state.settings.language,
+});
+
 // wraps dispatch to create nicer functions to call within our component
 const mapDispatchToProps = (dispatch) => ({
   startup: () => dispatch(StartupActions.startup())
 })
 
 export default connect(
-  null, 
+  mapStateToProps, 
   mapDispatchToProps
 )(RootContainer)
 

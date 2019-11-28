@@ -12,12 +12,19 @@ import { Card } from 'react-native-elements';
 
 class Home extends Component  {
 
-  /* static navigationOptions = {
-    title: I18n.t('home')
-  }; */
+  /* static navigationOptions = ({navigation}) => {
+    const {params = {}} = navigation.state;
+    return {
+        title: typeof(params)==='undefined' || typeof(params.title) === 'undefined' ? I18n.t('home'): params.title,
+        headerRight: <Button
+                         title="Refresh"
+                         onPress={ () => params.handleRefresh() } />
 
+    };
+  }; */
+  
   render() {
-    I18n.locale = this.props.language;
+    /* this.props.navigation.setParams({title: I18n.t('home')}); */
 
     return (
       <ScrollView>
@@ -31,7 +38,7 @@ class Home extends Component  {
             />
             <Button
               title={ I18n.t('goToMap') } 
-              onPress={ () => this.props.navigateTo('map') }/>
+              onPress={ () => this.props.navigation.setParams({title: I18n.t('home')}) }/>
           </Card>
 
           <Card title={ I18n.t('trail') } style={styles.card}>

@@ -91,7 +91,7 @@ class Settings extends React.Component {
           settings.map((item) => [
             <TouchableOpacity
                 key={item.name}
-                onPress={() => navigate('lang')}
+                onPress={() => navigate(item.screen)}
             > 
               <ListItem
                   title={I18n.t(item.name)}

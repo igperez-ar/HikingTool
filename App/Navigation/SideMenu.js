@@ -21,7 +21,7 @@ class SideMenu extends Component {
     this.routes = [
       {id: 0, name: 'home',     screen: 'home',      icon: 'home'},
       {id: 1, name: 'map',      screen: 'map',       icon: 'compass'},
-      {id: 2, name: 'trails',   screen: 'trailist',  icon: 'nature'},
+      {id: 2, name: 'trailist', screen: 'trailist',  icon: 'nature'},
       {id: 3, name: 'camera',   screen: 'camera',    icon: 'camera'},
       {id: 4, name: 'weather',  screen: 'weather',   icon: 'cloud'},
       {id: 6, name: 'settings', screen: 'settings',  icon: 'settings'},
@@ -37,9 +37,12 @@ class SideMenu extends Component {
   };
  
   render() {
-    activeRoute = (this.props.navigation.state.routes[0].routes.length > 1 
-                   ? this.props.navigation.state.routes[0].routes[1].routeName 
-                   : 'home');
+    /* console.warn(this.props.navigation.state.routes[0].routes); */
+    const routesList = this.props.navigation.state.routes[0].routes;
+    const routesLength = routesList.length;
+    const activeRoute = (routesLength > 1 
+                          ? routesList[routesLength-1].routeName 
+                          : 'home');
     /* const activeRoute = 'home'; */
 
     return (

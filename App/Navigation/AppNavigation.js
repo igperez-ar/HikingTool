@@ -40,7 +40,7 @@ class NavigationDrawerStructure extends Component {
     return (
       <View style={{ flexDirection: 'row' }}>
         <TouchableOpacity 
-          style={{ paddingLeft: 14 }}
+          style={{ paddingLeft: 15 }}
           onPress={ this.props.navigationProps.state.routeName === 'home' ? 
                     this.toggleDrawer.bind(this) : 
                     this.goBack.bind(this) }
@@ -48,7 +48,7 @@ class NavigationDrawerStructure extends Component {
           <Text>
             <Icon 
               name={this.props.navigationProps.state.routeName === 'home' ? "menu" : "arrow-left"} 
-              style={{ fontSize: 30 }} 
+              style={{ color: 'white', fontSize: 30 }} 
             />
           </Text>
         </TouchableOpacity>
@@ -62,7 +62,6 @@ const MainStack = createStackNavigator({
   home: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }) => ({
-      title: I18n.t('home'),
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: bgHeader,
@@ -73,9 +72,7 @@ const MainStack = createStackNavigator({
   map: {
     screen: MapScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Mapa',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },
@@ -85,9 +82,7 @@ const MainStack = createStackNavigator({
   trailist: {
     screen: TrailListScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Senderos',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },
@@ -97,9 +92,7 @@ const MainStack = createStackNavigator({
   trail: {
     screen: TrailScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Sendero',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },
@@ -109,9 +102,7 @@ const MainStack = createStackNavigator({
   camera: {
     screen: CameraScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Camara',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },
@@ -121,9 +112,7 @@ const MainStack = createStackNavigator({
   weather: {
     screen: WeatherScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Clima',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },
@@ -133,9 +122,7 @@ const MainStack = createStackNavigator({
   settings: {
     screen: SettingsScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Ajustes',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },
@@ -145,9 +132,7 @@ const MainStack = createStackNavigator({
   lang: {
     screen: LanguageSelectorScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Ajustes',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },
@@ -157,9 +142,7 @@ const MainStack = createStackNavigator({
   about: {
     screen: AboutScreen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Clima',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
- 
       headerStyle: {
         backgroundColor: bgHeader,
       },

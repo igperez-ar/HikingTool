@@ -108,6 +108,7 @@ android {
         versionCode 1
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -139,6 +140,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-fast-image')
     implementation project(':react-native-camera')
     implementation project(':react-native-config')
     implementation project(':react-native-device-info')
@@ -149,6 +151,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':@react-native-mapbox-gl_maps')
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 // Run this once to be able to run the application with BUCK

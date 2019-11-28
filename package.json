@@ -25,6 +25,9 @@
   },
   "dependencies": {
     "@react-native-mapbox-gl/maps": "7.0.6",
+    "@turf/boolean-point-in-polygon": "6.0.1",
+    "@turf/buffer": "5.1.5",
+    "@turf/helpers": "6.1.4",
     "apisauce": "1.0.3",
     "format-json": "1.0.3",
     "identity-obj-proxy": "3.0.0",
