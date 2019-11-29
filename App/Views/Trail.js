@@ -53,7 +53,7 @@ class Trail extends React.Component {
                   />
                   <Button 
                     title="Ver"
-                    onPress={ () => navigate('interestPoint', {interestPoint: point}) }
+                    onPress={ () => navigate('interestPoint', {point: point}) }
                   />
                 </Card>
               ))
@@ -73,6 +73,10 @@ class Trail extends React.Component {
                       source={{priority: FastImage.priority.high},
                       wildlife[specie].photo}
                     />
+                    <Button 
+                    title="Ver"
+                    onPress={ () => navigate('wildlife', {wildlife: specie})}
+                  />
                     <TouchableOpacity
                       style={{height:10, marginTop:20}}
                     >
@@ -98,6 +102,7 @@ class Trail extends React.Component {
                   />
                   <Button 
                     title="Ver"
+                    onPress={ () => navigate('flora', {flora: specie})}
                   />
                 </Card>
               ))
@@ -110,8 +115,8 @@ class Trail extends React.Component {
 
 const mapStateToProps = (state) => ({
   interestPoints: state.interestPoints.data.features,
-  flora: state.species.floraSPA,
-  wildlife: state.species.wildlifeSPA
+  flora: state.settings.language == 'spa' ? state.species.floraSPA : state.species.floraENG,
+  wildlife: state.settings.language == 'spa' ? state.species.wildlifeSPA : state.species.wildlifeENG
 });
 
 export default connect(

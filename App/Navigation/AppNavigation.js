@@ -21,6 +21,9 @@ import WeatherScreen from '../Views/Weather';
 import SettingsScreen from '../Views/Settings';
 import LanguageSelectorScreen from '../Views/LanguageSelector';
 import AboutScreen from '../Views/About';
+import InterestPointScreen from '../Views/InterestPoint';
+import FloraScreen from '../Views/Flora';
+import WildlifeScreen from '../Views/Wildlife';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SideMenu from './SideMenu';
@@ -91,6 +94,36 @@ const MainStack = createStackNavigator({
   },
   trail: {
     screen: TrailScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  interestPoint: {
+    screen: InterestPointScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  flora: {
+    screen: FloraScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: bgHeader,
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+  wildlife: {
+    screen: WildlifeScreen,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {

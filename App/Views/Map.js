@@ -172,6 +172,8 @@ class Map extends Component {
   }
 
   renderCard() {
+
+    const { navigate } = this.props.navigation;
     if (this.state.showCard)
       if ("State" in this.state.cardData.properties) {
         return ( 
@@ -195,6 +197,7 @@ class Map extends Component {
             <Button 
               title={I18n.t('moreInfo')}
               disabled={this.state.cardData.properties.State == "visitado" ? false : true }
+              onPress={ () => navigate('interestPoint', {point: this.state.cardData.properties.id -1})}
             />
           </View>
         );
@@ -211,7 +214,7 @@ class Map extends Component {
             </TouchableOpacity> 
             
             <Text style={styles.detailsTitle}>
-              {this.state.cardData.properties.Name}
+              {this.state.cardData.properties.name}
             </Text>
             <Divider style={styles.divider}/>
             <Image
@@ -220,6 +223,7 @@ class Map extends Component {
             />
             <Button 
               title={I18n.t('moreInfo')}
+              onPress={ () => navigate('trail', {trail: this.state.cardData.properties.id -1})}
             />
           </View>
         );
