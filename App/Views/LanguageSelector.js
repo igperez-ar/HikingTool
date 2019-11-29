@@ -26,19 +26,11 @@ const languages = [
 ];
 
 class LanguageSelector extends React.Component {
-  
-  static navigationOptions = {
-    title: I18n.t('settings')
-  };
-
-  constructor(props) {
-    super(props);
-  }
 
   handleSubmit = (locale) => {
     I18n.locale = locale;
     this.props.change_language(locale);
-    this.props.navigation.push('settings');
+    this.props.navigation.navigate('settings');
   };
 
   handleLocaleChange = (locale) => {

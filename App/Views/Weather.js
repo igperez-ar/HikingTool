@@ -76,7 +76,7 @@ class Weather extends Component {
           <View style={styles.container}>
             <ScrollView>
               <View style={{ padding: 10 }}>
-                <View style={[styles.actualDay, {backgroundColor: 'rgba(255, 255, 255, 0.7)', marginBottom:3}]}>
+                <View style={[styles.actualDay, {backgroundColor: 'rgba(255, 255, 255, 0.8)', marginBottom:3}]}>
                   <View style={{ padding: 10 }}>
                     <Text style={styles.titulo}>Ushuaia, TDF</Text>
                     <Divider style={{ backgroundColor: 'grey', height: 2, marginBottom: 20 }} />

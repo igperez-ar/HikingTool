@@ -64,6 +64,7 @@ import {
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import I18n from '../I18n/i18n';
+import { connect } from 'react-redux';
 
 
 const settings = [
@@ -72,13 +73,13 @@ const settings = [
     icon: 'language',
     screen: 'lang'
   },
-  {
-    name: 'weather',
-    icon: 'cloud',
-    screen: 'weather'
-  }
 ];
 
+/* {
+  name: 'weather',
+  icon: 'cloud',
+  screen: 'weather'
+} */
 
 class Settings extends React.Component {
 
@@ -91,7 +92,7 @@ class Settings extends React.Component {
           settings.map((item) => [
             <TouchableOpacity
                 key={item.name}
-                onPress={() => navigate(item.screen)}
+                onPress={() => {navigate(item.screen)}}
             > 
               <ListItem
                   title={I18n.t(item.name)}
@@ -127,4 +128,11 @@ class Settings extends React.Component {
   }
 }); */
 
-export default Settings;
+const mapStateToProps = state => ({
+  language: state.settings.language
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(Settings);
