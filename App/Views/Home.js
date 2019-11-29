@@ -45,7 +45,7 @@ class Home extends Component  {
                 key={idTrail}
                 style={styles.card}>
                 <View style={[styles.rowContent, {justifyContent:"space-between"}]}>
-                  <Text  numberOfLines={1} ellipsizeMode="tail" style={styles.subtitle}>{senderos[idTrail].properties.name}</Text>
+                  <Text numberOfLines={1} ellipsizeMode="tail" style={styles.subtitle}>{senderos[idTrail].properties.name}</Text>
                   <Badge 
                     value={(index+1)+"/"+(popularIndex.length)} 
                     textStyle={{fontSize:14}}

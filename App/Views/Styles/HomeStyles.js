@@ -9,9 +9,7 @@ export default StyleSheet.create({
       elevation: 10,
       padding: 20,
       marginHorizontal: 10,
-      width: Dimensions.get('window').width - 20,
-      /* borderBottomRightRadius: 20,
-      borderBottomLeftRadius: 20 */
+      width: Dimensions.get('window').width - 20
     },
     image: {
       width: '100%',
