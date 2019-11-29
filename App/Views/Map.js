@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Picker,
   Text,
-  ScrollView,
   Image
 } from 'react-native';
 import { CheckBox, Divider } from 'react-native-elements';
@@ -31,6 +30,9 @@ import PuntosInteresGeoJSON from '../Jsons/puntos-interes-pn-tdf.json';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 MapboxGL.setAccessToken("pk.eyJ1Ijoic2VuZGVyb3MiLCJhIjoiY2swdmR3OGgzMHk0ODNtcXM5ZzVzbng1aSJ9.aPqBLjTycTdR-4gMbpSM8w");
 
+//Deshabilita Warnings
+console.disableYellowBox = true;
+
 var updateLocation = 0
 
 class Map extends Component {
@@ -40,6 +42,7 @@ class Map extends Component {
     this.onMapPress = this.onMapPress.bind(this); 
     this.onSourceLayerPress = this.onSourceLayerPress.bind(this);
     this.onFiltersBtnPress = this.onFiltersBtnPress.bind(this);
+    this.onCloseBtnPress = this.onCloseBtnPress.bind(this);
     this.updateLayers = this.updateLayers.bind(this);
     this.onUserLocationUpdate = this.onUserLocationUpdate.bind(this);
     this.state = {
@@ -57,7 +60,7 @@ class Map extends Component {
   async componentDidMount() {
     /* MapboxGL.offlineManager.deletePack('ParqueTDF'); */
     //Bloque para pedir acceso GPS. Falta verificarlo.
-    /* PermissionsAndroid.requestMultiple(
+    PermissionsAndroid.requestMultiple(
       [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
       {
@@ -71,17 +74,16 @@ class Map extends Component {
     }).catch(error => {
         //console.warn(error);
         //reject();
-    }); */
+    });
 
     MapboxGL.setTelemetryEnabled(false);
 
     progressListener = (offlineRegion, status) => console.log(offlineRegion, status);
     
-
     offlinePack = await MapboxGL.offlineManager.getPack('ParqueTDF');
 
     if (offlinePack == undefined) {
-      console.warn('Se eliminó');
+      //console.warn('Se eliminó');
       await MapboxGL.offlineManager.createPack({
         name: 'ParqueTDF',
         styleURL: 'mapbox://styles/senderos/ck1qwqq5f3zom1cnnju1xvqha',
@@ -171,6 +173,12 @@ class Map extends Component {
     }));
   }
 
+  onCloseBtnPress() {
+    this.setState({
+      showCard: false
+    });
+  }
+
   renderCard() {
 
     const { navigate } = this.props.navigation;
@@ -181,7 +189,7 @@ class Map extends Component {
             <TouchableOpacity
               style={styles.closeFiltersButton}
               hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
-              onPress={this.onFiltersBtnPress}
+              onPress={this.onCloseBtnPress}
             >
               <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
             </TouchableOpacity> 
