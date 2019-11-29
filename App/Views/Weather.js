@@ -67,12 +67,13 @@ class Weather extends Component {
       return null
     } else {
       return (
-        <ImageBackground
+        <View style={{flex:1, backgroundColor: 'rgba(145, 200, 210, 0.6)'}}>
+        {/* <ImageBackground
           source={require('../Images/partly-cloudy.jpg')}
           imageStyle={{resizeMode: "cover", opacity:1}}
           style={{width: '100%', height: '100%'}}
-        >
-          <View style={[styles.container, {backgroundColor: 'rgba(255, 255, 255, 0.3)'}]}>
+        > */}
+          <View style={styles.container}>
             <ScrollView>
               <View style={{ padding: 10 }}>
                 <View style={[styles.actualDay, {backgroundColor: 'rgba(255, 255, 255, 0.7)', marginBottom:3}]}>
@@ -155,7 +156,8 @@ class Weather extends Component {
               </View>
             </ScrollView>
           </View>
-        </ImageBackground>
+        {/* </ImageBackground> */}
+      </View>
       )
     }
   }

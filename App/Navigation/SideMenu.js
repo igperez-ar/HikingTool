@@ -43,7 +43,6 @@ class SideMenu extends Component {
     const activeRoute = (routesLength > 1 
                           ? routesList[routesLength-1].routeName 
                           : 'home');
-    /* const activeRoute = 'home'; */
 
     return (
       <ScrollView>
