@@ -26,7 +26,7 @@ class Trail extends React.Component {
         <ScrollView style={styles.container}>
             <Image
               style={styles.image}
-              source={{uri: 'https://placeimg.com/640/480/nature'}}
+              source={{uri: trail.images}}
             />
             <View style={[styles.titleContainer, {marginBottom: 5}]}>  
               <Text style={[styles.title, {alignSelf: "center"}]}>
@@ -88,6 +88,7 @@ class Trail extends React.Component {
                   />
                   <TouchableOpacity
                     onPress={ () => navigate('interestPoint', {point: point}) }
+                    /* disabled={interestPoints[point].properties.State == "visitado" ? false : true } */
                     style={{width:"100%"}}
                   >
                     <Text style={styles.button}>Ver</Text>

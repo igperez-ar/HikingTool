@@ -83,7 +83,7 @@ export default class TrailList extends React.Component {
     }
     let trails = ds.cloneWithRows(TrailsJSON.features)
     return (
-      <View>
+      <View style={{backgroundColor: 'rgba(145, 200, 210, 0.4)'}}>
         <ListView
           dataSource={trails}
           renderRow={this.renderRow}
