@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     image: {
-      width: '35%',
-      height: 100,
-      borderRadius: 50,
+      width: 120,
+      height: 120,
+      borderRadius: 60,
       borderWidth: 2,
       borderColor: 'grey',
       marginRight: 20

@@ -57,7 +57,7 @@ export default class TrailList extends React.Component {
         <View style={styles.content}>
           <Image
             style={styles.image}
-            source={{uri: 'https://placeimg.com/640/480/nature'}}
+            source={{uri: rowData.properties.images}}
           />
           <View>
             <Text>{I18n.t('difficulty')}: {rowData.properties.difficulty}</Text>

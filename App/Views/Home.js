@@ -55,7 +55,7 @@ class Home extends Component  {
                 <Divider style={{marginVertical:10, height:2}}></Divider>
                 <Image
                   style={styles.image}
-                  source={{uri: 'https://placeimg.com/640/480/nature'}}
+                  source={{uri: senderos[idTrail].properties.images}}
                 />
                 <View style={[styles.rowContent, styles.box]}>
                   <View style={{alignItems:"center", width:80}}>

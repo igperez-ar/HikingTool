@@ -18,11 +18,7 @@
                 "flora": [1,5,7],
                 "accesibility": null,
                 "important": "Recuerde, en caso de avistaje de huemul debe avisar al personal del Parque.",
-                "images": [
-                    {
-                        "url": "https:\/\/sib.gob.ar\/gestor\/files\/1488378312.1732_Chorrillo del Salto.jpg"
-                    }
-                ]
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -150,7 +146,7 @@
                 "flora": [11,5,9],
                 "accesibility": null,
                 "important": "Recuerde, en caso de avistaje de huemul debe avisar al personal del Parque.",
-                "images": []
+                "images": "https://www4.tierradelfuego.gov.ar/wp-content/uploads/2018/03/40792039561_712f888b76_z.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -246,7 +242,7 @@
                 "flora": [3,4,5],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://www.welcomeargentina.com/paseos/glaciar_martial/glaciar-martial-01.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -1983,7 +1979,7 @@
                 "flora": [19,17,6],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "http://www.excursionesenushuaia.com/var/skiencerrocastor_com/storage/images/excursiones/trekking/trekking-parque-nacional/1710-13-esl-AR/Trekking-Parque-Nacional.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -2124,7 +2120,7 @@
                 "flora": [9,10,11],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -3505,7 +3501,7 @@
                 "flora": [6,8,10],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://ahicitonomas.files.wordpress.com/2017/01/mirador-del-glaciar.jpg?w=625&h=416"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -3631,7 +3627,7 @@
                 "flora": [1,3,4,12],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -3987,7 +3983,7 @@
                 "flora": [15,1,2],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -4438,7 +4434,7 @@
                 "flora": [2,11,19],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -4734,7 +4730,7 @@
                 "flora": [17,18],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -4860,7 +4856,7 @@
                 "flora": [3,4,5],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -4911,7 +4907,7 @@
                 "flora": [7,2,15],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -4967,7 +4963,7 @@
                 "flora": [7,2,15],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5028,7 +5024,7 @@
                 "flora": [15,18,3],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5124,7 +5120,7 @@
                 "flora": [3,13,20],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5160,7 +5156,7 @@
                 "flora": [15,16,6],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -5271,7 +5267,7 @@
                 "flora": [4,3,14],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -6417,7 +6413,7 @@
                 "flora": [5,2,1],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -7963,7 +7959,7 @@
                 "flora": [19,13,11],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -9124,7 +9120,7 @@
                 "flora": [4,9,7],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -9510,7 +9506,7 @@
                 "flora": [11,8],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -9946,7 +9942,7 @@
                 "flora": [1,3,4],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -10077,7 +10073,7 @@
                 "flora": [6,1,4],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -10643,7 +10639,7 @@
                 "flora": [20,19,18],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -10879,7 +10875,7 @@
                 "flora": [15,14,13],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -11077,7 +11073,7 @@
                 "flora": [10,9,8],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -12023,7 +12019,7 @@
                 "flora": [7,6,5],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -12271,7 +12267,7 @@
                 "flora": [4,3,2],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -12452,7 +12448,7 @@
                 "flora": [2,1,20],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -12868,7 +12864,7 @@
                 "flora": [19,17,15],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -14044,7 +14040,7 @@
                 "flora": [20,1,10],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",
@@ -14400,7 +14396,7 @@
                 "flora": [16,5,4],
                 "accesibility": null,
                 "important": null,
-                "images": []
+                "images": "https://media-cdn.tripadvisor.com/media/photo-s/11/8e/68/cd/sendero-desde-el-hotel.jpg"
             },
             "geometry": {
                 "type": "MultiLineString",

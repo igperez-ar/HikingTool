@@ -227,7 +227,7 @@ class Map extends Component {
             <Divider style={styles.divider}/>
             <Image
               style={styles.image}
-              source={{uri: 'https://placeimg.com/640/480/nature'}}
+              source={{uri: this.state.cardData.properties.images}}
             />
             <Button 
               title={I18n.t('moreInfo')}
