@@ -8,16 +8,92 @@ import {
   Image,
   Alert
 } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import styles from './Styles/TrailListStyles'
 import { Card } from 'react-native-elements'
 import I18n from '../I18n/i18n'
 import trailsAPI from '../Services/SenderoApi'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { YellowBox } from 'react-native'
+
+import TrailsJSON from '../Jsons/senderos-pn-tdf-es.json'
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
+YellowBox.ignoreWarnings([
+  'Require cycle:'
+])
+
 export default class TrailList extends React.Component {
+
+  static navigationOptions =  {
+    headerRight: 
+      <TouchableOpacity
+        onPress={ () => alert("Filtrado") } 
+      >
+        <Icon
+          name="md-more"
+          style={{ fontSize: 35, color: 'white', marginRight:25 }}
+        />
+      </TouchableOpacity>
+  };
+
+  constructor(props) {
+      super(props);
+      this.service = trailsAPI.create();
+      this.renderRow = this.renderRow.bind(this);
+      this.state = {
+        isLoading: false,
+        trails: ds,
+      };
+  }
+
+  renderRow(rowData) {
+    const { navigate } = this.props.navigation;
+    
+    return (
+      <Card title={rowData.properties.name}>
+        <View style={styles.content}>
+          <Image
+            style={styles.image}
+            source={{uri: 'https://placeimg.com/640/480/nature'}}
+          />
+          <View>
+            <Text>{I18n.t('difficulty')}: {rowData.properties.difficulty}</Text>
+            <Text>{I18n.t('aproxTime')}:  {rowData.properties.estimated_time}</Text>
+            <Text>{I18n.t('selfGuided')}: {rowData.properties.selfguided === 0 ? 'No' : 'Si'}</Text>
+          </View>
+        </View>
+        <Button
+          title={I18n.t('seeTrail')}
+          onPress={ () => navigate('trail', {trail: rowData.properties.id - 1}) }
+        />
+      </Card>
+    );
+  }
+
+  render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 30}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+    let trails = ds.cloneWithRows(TrailsJSON.features)
+    return (
+      <View>
+        <ListView
+          dataSource={trails}
+          renderRow={this.renderRow}
+        />
+      </View>
+    );
+  } 
+}
+
+/* export default class TrailList extends React.Component {
 
   static navigationOptions =  {
     headerRight: 
@@ -98,4 +174,4 @@ export default class TrailList extends React.Component {
       </View>
     );
   } 
-}
+} */

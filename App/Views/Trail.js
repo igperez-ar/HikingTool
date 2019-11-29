@@ -9,28 +9,23 @@ import {
 } from 'react-native'
 import styles from './Styles/TrailStyles'
 import { Card, Divider } from 'react-native-elements'
+import FastImage from 'react-native-fast-image'
 
-const interestPoints = [
-  {id: 1,
-   name: "algo"},
-  {id: 2,
-   name: "algo"},
-  {id: 3,
-   name: "algo"},
-  {id: 4,
-   name: "algo"}
-]
+import { connect } from 'react-redux';
+import TrailsJSON from '../Jsons/senderos-pn-tdf-es.json'
 
 class Trail extends React.Component {
 
     render() {
       const { navigate } = this.props.navigation;
-      const trail = this.props.navigation.state.params.trail;
+      const { interestPoints, flora, wildlife } = this.props;
+      const ID = this.props.navigation.state.params.trail;
+      const trail = TrailsJSON.features[ID].properties;
 
       return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>
-              {trail.nombre}
+              {trail.name}
             </Text>
             <Divider style={{marginVertical: 10, height:2}}></Divider>
             <Image
@@ -38,25 +33,27 @@ class Trail extends React.Component {
               source={{uri: 'https://placeimg.com/640/480/nature'}}
             />
             <Text style={styles.subtitle3}>Dificultad:</Text>
-            <Text style={styles.text}>{trail.dificultad}</Text>
+            <Text style={styles.text}>{trail.difficulty}</Text>
             <Text style={styles.subtitle3}>Descripción:</Text>
-            <Text style={styles.text}>{trail.descripcion}</Text>
+            <Text style={styles.text}>{trail.description}</Text>
 
             <Text style={styles.subtitle2}>Puntos de Interés</Text>
             <Divider style={{marginVertical: 10, marginBottom:5, height:2}}></Divider>
 
             <ScrollView horizontal={true}>
-            { interestPoints.map((point) => (
+            { trail.interest_points.map((point) => (
                 <Card
-                  key={point.id}
-                  title={point.name}
+                  //point identifica la pos del punto de interés y sirve como key
+                  key={point}
+                  title={interestPoints[point].properties.Name}
                 >
-                  <Image
-                    style={{width:200, height:150, marginBottom:10}}
-                    source={{uri: 'https://placeimg.com/640/480/nature'}}
+                  <FastImage style={{width:200, height:150, marginBottom:10}} 
+                    source={{priority: FastImage.priority.high},
+                    interestPoints[point].properties.photo}
                   />
                   <Button 
                     title="Ver"
+                    onPress={ () => navigate('interestPoint', {interestPoint: point}) }
                   />
                 </Card>
               ))
@@ -66,16 +63,16 @@ class Trail extends React.Component {
             <Divider style={{marginVertical: 10, marginBottom:5, height:2}}></Divider>
 
             <ScrollView>
-            { interestPoints.map((point) => (
+            { trail.fauna.map((specie) => (
                 <Card
-                  key={point.id}
-                  title={point.name}
+                  key={specie}
+                  title={wildlife[specie].name}
                 >
                   <View style={{flexDirection: 'row', justifyContent:"space-between"}}>
-                    <Image
-                      style={{width:100,  height:100, borderRadius:50, marginBottom:10}}
-                      source={{uri: 'https://placeimg.com/640/480/nature'}}
-                      />
+                    <FastImage style={{width:200, height:150, marginBottom:10}} 
+                      source={{priority: FastImage.priority.high},
+                      wildlife[specie].photo}
+                    />
                     <TouchableOpacity
                       style={{height:10, marginTop:20}}
                     >
@@ -90,14 +87,14 @@ class Trail extends React.Component {
             <Divider style={{marginVertical: 10, marginBottom:5, height:2}}></Divider>
 
             <ScrollView style={{paddingBottom: 60}}>
-            { interestPoints.map((point) => (
+            { trail.flora.map((specie) => (
                 <Card
-                  key={point.id}
-                  title={point.name}
+                  key={specie}
+                  title={flora[specie].name}
                 >
-                  <Image
-                    style={{width:200, height:150, marginBottom:10}}
-                    source={{uri: 'https://placeimg.com/640/480/nature'}}
+                  <FastImage style={{width:200, height:150, marginBottom:10}} 
+                      source={{priority: FastImage.priority.high},
+                      flora[specie].photo}
                   />
                   <Button 
                     title="Ver"
@@ -111,4 +108,14 @@ class Trail extends React.Component {
     }
 }
 
-export default Trail;
+const mapStateToProps = (state) => ({
+  interestPoints: state.interestPoints.data.features,
+  flora: state.species.floraSPA,
+  wildlife: state.species.wildlifeSPA
+});
+
+export default connect(
+  mapStateToProps, 
+  null
+)(Trail);
+

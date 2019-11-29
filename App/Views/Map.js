@@ -13,6 +13,7 @@ import { CheckBox, Divider } from 'react-native-elements';
 import I18n from '../I18n/i18n';
 import FastImage from 'react-native-fast-image';
 import { connect } from 'react-redux';
+import InterestPointsActions from '../Redux/InterestPointsRedux'
 //turf
 import { point } from '@turf/helpers';
 import buffer from '@turf/buffer';
@@ -23,7 +24,7 @@ import redMarker from '../Images/Icons/marker-red.png';
 import blueMarker from '../Images/Icons/marker-blue.png';
 import styles from './Styles/MapStyles'
 //mapbox
-import SenderosGeoJSON from '../Jsons/senderos-pn-tdf.json';
+import SenderosGeoJSON from '../Jsons/senderos-pn-tdf-es.json';
 import SenderosEmergenciaGeoJSON from '../Jsons/senderos-emergencia-pn-tdf.json';
 /* import SenderosGeoJSON from '../Jsons/newtrails-pn-tdf.json'; */
 import PuntosInteresGeoJSON from '../Jsons/puntos-interes-pn-tdf.json';
@@ -40,6 +41,7 @@ class Map extends Component {
     this.onSourceLayerPress = this.onSourceLayerPress.bind(this);
     this.onFiltersBtnPress = this.onFiltersBtnPress.bind(this);
     this.updateLayers = this.updateLayers.bind(this);
+    this.onUserLocationUpdate = this.onUserLocationUpdate.bind(this);
     this.state = {
       showTrails: true,
       showEmergencyTrails: false,
@@ -186,9 +188,9 @@ class Map extends Component {
               {this.state.cardData.properties.Name}
             </Text>
             <Divider style={styles.divider}/>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://placeimg.com/640/480/nature'}}
+            <FastImage style={styles.image} 
+                      source={{priority: FastImage.priority.high},
+                      this.state.cardData.properties.photo}
             />
             <Button 
               title={I18n.t('moreInfo')}
@@ -250,7 +252,7 @@ class Map extends Component {
                   {
                     SenderosGeoJSON.features.map((item) =>{
                       return(
-                      <Picker.Item label={item.properties.name} value={item.properties.id} key={null}/>
+                      <Picker.Item label={item.properties.name} value={item.properties.id} key={item.properties.id}/>
                       );
                     })
                   }
@@ -314,8 +316,8 @@ class Map extends Component {
             >
               <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
-                style={{ lineColor: 'brown', lineWidth: 3, visibility: 'visible' }}
-                filter={this.state.showTrails ? (this.state.trail == 0 ? ['all'] : ['==', 'id', this.state.trail]) : ['==', 'id', 0]}
+                style={{ lineColor: 'brown', lineWidth: 3, visibility: this.state.showTrails ? 'visible' : 'none' }}
+                filter={this.state.trail == 0 ? ['all'] : ['==', 'id', this.state.trail]}
               />
             </MapboxGL.ShapeSource>
             <MapboxGL.ShapeSource 
