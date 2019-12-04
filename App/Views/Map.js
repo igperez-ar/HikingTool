@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View } from 'react-native-animatable';
 import {
   Button,
-  PermissionsAndroid,
   TouchableOpacity,
   Picker,
   Text,
@@ -58,50 +57,6 @@ class Map extends Component {
   }
 
   async componentDidMount() {
-    /* MapboxGL.offlineManager.deletePack('ParqueTDF'); */
-    //Bloque para pedir acceso GPS. Falta verificarlo.
-    PermissionsAndroid.requestMultiple(
-      [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-       PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
-      {
-        title: 'Give Location Permission',
-        message: 'App needs permission to find and show your position.'
-    })
-    .then(granted => {
-        //console.warn(granted);
-        resolve();
-
-    }).catch(error => {
-        //console.warn(error);
-        //reject();
-    });
-
-    MapboxGL.setTelemetryEnabled(false);
-
-    progressListener = (offlineRegion, status) => console.log(offlineRegion, status);
-    
-    offlinePack = await MapboxGL.offlineManager.getPack('ParqueTDF');
-
-    if (offlinePack == undefined) {
-      //console.warn('Se eliminó');
-      await MapboxGL.offlineManager.createPack({
-        name: 'ParqueTDF',
-        styleURL: 'mapbox://styles/senderos/ck1qwqq5f3zom1cnnju1xvqha',
-        minZoom: 10,
-        maxZoom: 20,
-        bounds: [[-68.32, -54.741], [-68.61, -54.90]]
-      }, progressListener, null)
-    }
-
-    //Las imágenes de los p. de interes quedan listas para ser renderizadas.
-    //Dependiendo del json inicial se podría hacer en componentDidUpdate(), pero por ahora no es necesario.
-    const uris = []
-    for (var i = 0; i < this.props.interestPoints.features.length; i++) {
-      uris.push({
-        uri: Image.resolveAssetSource(this.props.interestPoints.features[i].properties.photo).uri
-      })
-    }
-    FastImage.preload(uris);
     //
   }  
 
