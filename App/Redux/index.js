@@ -14,6 +14,7 @@ export const reducers = combineReducers({
   weather: require('./WeatherRedux').reducer,
   interestPoints: require('./InterestPointsRedux').reducer,
   species: require('./SpeciesRedux').reducer,
+  pictures: require('./PicturesRedux').reducer
 })
 
 export default () => {
