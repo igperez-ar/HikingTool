@@ -12,6 +12,9 @@ import { connect } from 'react-redux'
 import PicturesActions from '../Redux/PicturesRedux'
 import styles from './Styles/CameraStyles'
 
+import MapboxGL from "@react-native-mapbox-gl/maps";
+MapboxGL.setAccessToken("pk.eyJ1Ijoic2VuZGVyb3MiLCJhIjoiY2swdmR3OGgzMHk0ODNtcXM5ZzVzbng1aSJ9.aPqBLjTycTdR-4gMbpSM8w");
+
 /* const PendingView = () => (
   <View
     style={{
@@ -25,11 +28,16 @@ import styles from './Styles/CameraStyles'
   </View>
 ); */
 
+//Vars para obtener coords.
+var coordinates = {};
+var getCoords = false;
+
 class Cam extends PureComponent {
 
   constructor(props){
     super(props);
-    this.onSavePicture = this.onSavePicture.bind(this); 
+    this.onSavePicture = this.onSavePicture.bind(this);
+    this.onUserLocationUpdate = this.onUserLocationUpdate.bind(this);
     this.state = {
       picturePath: null,
       comment: '',
@@ -39,10 +47,12 @@ class Cam extends PureComponent {
 
   onSavePicture() {
     copy = JSON.parse(JSON.stringify(this.props.pictures))
-    const picture = {'path': this.state.picturePath, 'comment': this.state.comment}
+    const picture = {'path': this.state.picturePath, 'comment': this.state.comment, 'coords': coordinates}
     copy.push(picture)
+    //Linea para verificar valores
+    //console.warn(copy)
     this.props.savePicture(copy)
-    this.setState({ picturePath: null, comment: null, showInput: false })
+    this.setState({ picturePath: null, comment: '', showInput: false })
   }
 
   renderInput() {
@@ -79,6 +89,14 @@ class Cam extends PureComponent {
     return null;
   }
 
+  onUserLocationUpdate(location) {
+    if (getCoords) {
+      //ingresa una única vez cuando se toma cada foto.
+      coordinates = { 'latitude': location.coords.latitude, 'longitude': location.coords.longitude};
+      getCoords = false;
+    }
+  }
+
   render() {
     const { pictures } = this.props;
     return (      
@@ -86,6 +104,11 @@ class Cam extends PureComponent {
         {this.state.picturePath != null ? 
           <ImageBackground source={{uri: this.state.picturePath}} style={styles.picture}>
             {this.renderInput()}
+            <MapboxGL.MapView>
+              <MapboxGL.UserLocation 
+                onUpdate={this.onUserLocationUpdate}
+              />
+            </MapboxGL.MapView>
           </ImageBackground>
         : 
         <RNCamera
@@ -122,6 +145,8 @@ class Cam extends PureComponent {
     //  eslint-disable-next-line
     CameraRoll.saveToCameraRoll(data.uri, "photo");
     this.setState({ picturePath: data.uri, showInput: true });
+    //Se busca las coordenadas al momento de tomar la foto para tener pos exacta.
+    getCoords = true;
   };
 
   /* takePicture() {
