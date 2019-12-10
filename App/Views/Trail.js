@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { 
   Text,
   Image,
@@ -6,13 +6,14 @@ import {
   Button,
   TouchableOpacity,
   View
-} from 'react-native'
-import styles from './Styles/TrailStyles'
-import { Card, Divider, Badge } from 'react-native-elements'
-import FastImage from 'react-native-fast-image'
+} from 'react-native';
+import I18n from '../I18n/i18n';
+import styles from './Styles/TrailStyles';
+import { Divider } from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
 
 import { connect } from 'react-redux';
-import TrailsJSON from '../Jsons/senderos-pn-tdf-es.json'
+import TrailsJSON from '../Jsons/senderos-pn-tdf-es.json';
 
 class Trail extends React.Component {
 
@@ -28,93 +29,91 @@ class Trail extends React.Component {
               style={styles.image}
               source={{uri: trail.images}}
             />
-            <View style={[styles.titleContainer, {marginBottom: 5}]}>  
-              <Text style={[styles.title, {alignSelf: "center"}]}>
-                {trail.name}
-              </Text>
-              <Divider style={{marginVertical: 10, height:2}}></Divider>
+            <View style={{alignItems:"center", marginVertical:15}}>  
+              <Text style={styles.title}>{trail.name}</Text>
+              <Divider style={[styles.divider, {width:220, marginBottom:10}]}></Divider>
             </View>
 
             <View style={styles.detailsContainer}>
-              <Text style={styles.subtitle3}>Dificultad:</Text>
-              <Text>{trail.difficulty}</Text>
-              <Text style={styles.subtitle3}>Tiempo estimado:</Text>
-              <Text>{trail.estimated_time}</Text>
-              <Text style={styles.subtitle3}>Distancia:</Text>
-              <Text>{trail.distance}</Text>
-              <Text style={styles.subtitle3}>Desnivel:</Text>
-              <Text>{trail.unevenness}</Text>
-              <Text style={styles.subtitle3}>Autoguiado:</Text>
-              <Text>{trail.selfguided ? "Si" : "No"}</Text>
               {
                 trail.important ? 
-                  <View>
-                    <Text style={styles.subtitle3}>Importante:</Text>
-                    <Text>{trail.important}</Text>
+                  <View style={{textAlign:'center'}}>
+                    <Text style={styles.importantTitle}>{I18n.t("important")}:</Text>
+                    <Text style={styles.importantText}>{trail.important}</Text>
                   </View>  
                   : null
               }
-              <Text style={styles.subtitle3}>Descripción:</Text>
-              <Text>{trail.description}</Text>
+              <Text style={styles.subtitle3}>{I18n.t("difficulty")}:</Text>
+              <Text>{trail.difficulty}</Text>
+              <Text style={styles.subtitle3}>{I18n.t("estTime")}:</Text>
+              <Text>{trail.estimated_time}</Text>
+              <Text style={styles.subtitle3}>{I18n.t("distance")}:</Text>
+              <Text>{trail.distance}</Text>
+              <Text style={styles.subtitle3}>{I18n.t("unevenness")}:</Text>
+              <Text>{trail.unevenness}</Text>
+              <Text style={styles.subtitle3}>{I18n.t("selfGuided")}:</Text>
+              <Text>{trail.selfguided ? I18n.t("yes") : I18n.t("no")}</Text>
+              <Text style={styles.subtitle3}>{I18n.t("desc")}:</Text>
+              <Text style={{textAlign:'justify'}}>{trail.description}</Text>
             </View>
 
             <View style={styles.titleContainer}>  
-              <Text style={styles.subtitle2}>Puntos de Interés</Text>
-              <Divider style={{height:2}}></Divider>
+              <Text style={styles.subtitle2}>{I18n.t("interestPoints")}</Text>
+              <Divider style={styles.divider}></Divider>
             </View>
 
-            <ScrollView horizontal={true} style={[styles.row, {marginRight:10}]}>
-            { trail.interest_points.map((point, index) => (
-                <View
-                  //point identifica la pos del punto de interés y sirve como key
-                  key={point}
-                  style={styles.card}
-                >
-                  <View style={[styles.rowContent, {justifyContent:"space-between"}]}>
-                    <Text numberOfLines={1} ellipsizeMode="tail"
-                      style={styles.cardTitle}
-                    >{interestPoints[point].properties.Name}
-                    </Text>
-                    <Badge 
-                      value={(index+1)+"/"+(trail.interest_points.length)} 
-                      textStyle={{fontSize:14}}
-                      badgeStyle={styles.badge}
-                    />
-                  </View>
-                  <Divider style={{marginVertical: 10, height: 2}}></Divider>
-                  <FastImage style={{width:200, height:150, marginBottom:10}} 
-                    source={{priority: FastImage.priority.high},
-                    interestPoints[point].properties.photo}
-                  />
-                  <TouchableOpacity
-                    onPress={ () => navigate('interestPoint', {point: point}) }
-                    /* disabled={interestPoints[point].properties.State == "visitado" ? false : true } */
-                    style={{width:"100%"}}
+            <View> 
+              <ScrollView horizontal={true} contentContainerStyle={{paddingHorizontal:5}}>
+              { trail.interest_points.map((point, index) => (
+                  <View
+                    //point identifica la pos del punto de interés y sirve como key
+                    key={point}
+                    style={styles.card}
                   >
-                    <Text style={styles.button}>Ver</Text>
-                  </TouchableOpacity>
-                </View>
-              ))
-            }
-            </ScrollView>  
-
-            <View style={styles.titleContainer}>  
-              <Text style={styles.subtitle2}>Fauna</Text>
-              <Divider style={{height:2}}></Divider>
+                    <View style={styles.cardTitleContainer}>
+                      <Text numberOfLines={1} ellipsizeMode="tail"
+                        style={styles.cardTitle}
+                      >{interestPoints[point].properties.Name}
+                      </Text>
+                    </View>
+                    <View style={styles.cardContent}>
+                      <FastImage style={{width:'100%', height:150, borderRadius:5, marginBottom:10}} 
+                        source={{priority: FastImage.priority.high},
+                        interestPoints[point].properties.photo}
+                      />
+                      <TouchableOpacity
+                        onPress={ () => navigate('interestPoint', {point: point}) }
+                        disabled={interestPoints[point].properties.State == "visitado" ? false : true }
+                        style={{width:"100%"}}
+                      >
+                        <Text style={(interestPoints[point].properties.State == "visitado" ? styles.info : styles.infoDisabled)}>{I18n.t("see")}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                ))
+              }
+              </ScrollView>  
             </View>
 
-            <ScrollView>
+            <View style={styles.titleContainer}>  
+              <Text style={styles.subtitle2}>{I18n.t("fauna")}</Text>
+              <Divider style={styles.divider}></Divider>
+            </View>
+
+            <ScrollView contentContainerStyle={{alignItems:'center'}}>
             { trail.fauna.map((specie, index) => (
                 <View
                   key={specie}
                   style={styles.especieCard}
                 >
-                  <Text numberOfLines={1} ellipsizeMode="tail"
-                        style={[styles.cardTitle, {textAlign:"center"}]}
-                  >{wildlife[specie].name}
-                  </Text>
-                  <Divider style={{marginVertical:10, height:2}}></Divider>
-                  <View style={{flexDirection: 'row', justifyContent:"space-between"}}>
+                  <View style={styles.cardTitleContainer}>
+                    <Text numberOfLines={1} ellipsizeMode="tail"
+                          style={[styles.cardTitle, {textAlign:"center"}]}
+                    >{wildlife[specie].name}
+                    </Text>
+                  </View>
+
+                  <View style={styles.especieContent}>
                     <FastImage style={styles.especieImage} 
                       source={{priority: FastImage.priority.high},
                       wildlife[specie].photo}
@@ -123,7 +122,7 @@ class Trail extends React.Component {
                       onPress={ () => navigate('wildlife', {wildlife: specie}) }
                       style={{width:"50%", marginVertical:40}}
                     >
-                      <Text style={styles.button}>Ver</Text>
+                      <Text style={styles.info}>{I18n.t("see")}</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -132,35 +131,33 @@ class Trail extends React.Component {
             </ScrollView>  
 
             <View style={styles.titleContainer}>  
-              <Text style={styles.subtitle2}>Flora</Text>
-              <Divider style={{height:2}}></Divider>
+              <Text style={styles.subtitle2}>{I18n.t("flora")}</Text>
+              <Divider style={styles.divider}></Divider>
             </View>
 
-            <ScrollView>
+            <ScrollView contentContainerStyle={{alignItems:'center'}}>
             { trail.flora.map((specie) => (
                 <View
                   key={specie}
                   style={styles.especieCard}
                 >
-                  <Text numberOfLines={1} ellipsizeMode="tail"
-                        style={[styles.cardTitle, {textAlign:"center"}]}
-                  >{flora[specie].name}
-                  </Text>
-                  <Divider style={{marginVertical:10, height:2}}></Divider>
-                  <View style={{flexDirection: 'row', justifyContent:"space-between"}}>
+                  <View style={styles.cardTitleContainer}>
+                    <Text numberOfLines={1} ellipsizeMode="tail"
+                          style={[styles.cardTitle, {textAlign:"center"}]}
+                    >{flora[specie].name}
+                    </Text>
+                  </View>
+
+                  <View style={styles.especieContent}>
                     <FastImage style={styles.especieImage} 
                         source={{priority: FastImage.priority.high},
                         flora[specie].photo}
                     />
-                    {/* <Button 
-                      title="Ver"
-                      onPress={ () => navigate('flora', {flora: specie})}
-                    /> */}
                     <TouchableOpacity
                       onPress={ () => navigate('flora', {flora: specie}) }
                       style={{width:"50%", marginVertical:40}}
                     >
-                      <Text style={styles.button}>Ver</Text>
+                      <Text style={styles.info}>{I18n.t("see")}</Text>
                     </TouchableOpacity>
                   </View>
                 </View>

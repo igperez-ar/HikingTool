@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { 
@@ -45,65 +44,49 @@ class SideMenu extends Component {
                           : 'home');
 
     return (
-      <ScrollView>
-      <View style={styles.header}>
-        <ImageBackground source={require('../Images/1.jpg')} style={StyleSheet.absoluteFillObject} resizeMode='cover'>
-          <Text style={styles.title}>HikingTool</Text>
-        </ImageBackground>
-        <View style={styles.overlay} />
-      </View>
-      {this.routes.map(route => (
-        <TouchableOpacity
-          key={route.id}
-          onPress={this.navigateToScreen(route.screen)}
-          style={
-            activeRoute === route.name
-              ? [styles.drawerItem, styles.activeDrawerItem]
-              : styles.drawerItem
-          }
-        >
-          {route.icon && (
-            <View style={styles.drawerItemLogo}>
-              <Icon
-                name={route.icon}
-                size={30}
-                color={activeRoute === route.name ? "#fff" : "#000"}
-              />
-            </View>
-          )}
-          <Text
-            style={
-              activeRoute === route.name
-                ? { color: "#fff" }
-                : { color: "#000" }
-            }
+      <ScrollView style={styles.content}>
+        <View style={styles.header}>
+          <ImageBackground source={require('../Images/0.jpg')} style={StyleSheet.absoluteFillObject} resizeMode='cover'>
+            <Text style={styles.title}>HikingTool</Text>
+          </ImageBackground>
+          <View style={styles.overlay} />
+        </View>
+        {this.routes.map(route => (
+          <View 
+            key={route.id}  
           >
-            { I18n.t(route.name) }
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+            <TouchableOpacity
+              onPress={this.navigateToScreen(route.screen)}
+              style={
+                activeRoute === route.name
+                  ? [styles.drawerItem, styles.activeDrawerItem]
+                  : styles.drawerItem
+              }
+            >
+              {route.icon && (
+                <View style={styles.drawerItemLogo}>
+                  <Icon
+                    name={route.icon}
+                    size={30}
+                    color={activeRoute === route.name ? "#fff" : '#51413E'}
+                  />
+                </View>
+              )}
+              <Text
+                style={
+                  activeRoute === route.name
+                    ? { fontWeight: 'bold', fontSize: 15, color: "#fff" }
+                    : { fontWeight: 'bold', fontSize: 15, color: '#51413E'}
+                }
+              >
+                { I18n.t(route.name) }
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
     );
   }
 }
 
 export default SideMenu;
-
-{/* <View style={styles.container}>
-        <ScrollView>
-          <View>
-            {this.routes.map((route) => (
-              <View style={styles.secondaryHeading} 
-                key={route.id}
-              >
-                <Text onPress={this.navigateToScreen(route.screen)}>
-                  {route.name}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </ScrollView>
-        <View style={styles.footerContainer}>
-        </View> 
-        <Text>HikingTool v1.0.1</Text>
-      </View> */}

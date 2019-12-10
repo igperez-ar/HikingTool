@@ -1,45 +1,44 @@
-import React, { Component } from 'react'
-import FastImage from 'react-native-fast-image'
-import { Text, View, ScrollView } from 'react-native'
-import { Divider } from 'react-native-elements'
+import React, { Component } from 'react';
+import FastImage from 'react-native-fast-image';
+import { Text, View, ScrollView } from 'react-native';
+import { Divider } from 'react-native-elements';
 
-import styles from './Styles/WildlifeStyles'
+import styles from './Styles/TrailCompStyle';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 class Wildlife extends Component {
 
   render () {
-
     const { wildlife } = this.props;
     ID = this.props.navigation.state.params.wildlife;
     const specie = wildlife[ID];
 
     return (
-        <View style={styles.main}>
-        <ScrollView>
-            <View>
-            <FastImage
-                style={styles.image}
-                source={{
-                priority: FastImage.priority.high},
-                specie.photo}
-            />
-            </View>
-            <View>
+        <ScrollView style={styles.container}>
+          <View>
+          <FastImage
+              style={styles.image}
+              source={{
+              priority: FastImage.priority.high},
+              specie.photo}
+          />
+          </View>
+          <View>
+              <View style={styles.titleContainer}>
                 <Text style={styles.title}>
                     {specie.name}
                 </Text>
-                <Text style={styles.subtitle}>
-                    {specie.id}
-                </Text>
-                <Divider style={styles.divider} />
-                <Text style={styles.content}>
-                    {specie.description}
-                </Text>
-            </View>
+              </View>  
+              <Text style={styles.subtitle}>
+                  {specie.id}
+              </Text>
+              <Divider style={styles.divider}></Divider>
+              <Text style={styles.description}>
+                  {specie.description}
+              </Text>
+          </View>
         </ScrollView>
-      </View>
     )
   }
 }

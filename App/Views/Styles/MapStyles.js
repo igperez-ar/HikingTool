@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { secondaryLight, primaryDark, primaryLight, primary, secondaryDark} from '../../global.styles'
 
 const windowWidth= Dimensions.get('window').width
 const windowHeight = Dimensions.get('window').height
@@ -10,18 +11,29 @@ export default StyleSheet.create({
   map: {
     flex: 1
   },
+  pickerItem:{
+    backgroundColor: "red"
+  },
   optionsButton: {
     position: 'absolute',
     right: 10,
     width: 55,
     height: 55,
-    elevation: 2,
+    elevation: 5,
     borderRadius: 30,
-    backgroundColor: 'white',
+    backgroundColor: secondaryLight,
     alignItems:'center',
     justifyContent:'center',
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0.2)',
+    borderWidth: 2,
+    borderColor: primaryDark,
+  },
+  emergency: {
+    alignSelf: 'center', 
+    width: '100%', 
+    marginTop: 15, 
+    elevation: 2,
+    backgroundColor: secondaryDark,
+    borderWidth: 0
   },
   overlay: {
     position: 'absolute',
@@ -35,9 +47,38 @@ export default StyleSheet.create({
     borderTopEndRadius: 20,
     width: '95%'
   },
+  info: {
+    fontSize: 17,
+    width: '100%',
+    height: 40,
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: primaryDark,
+    borderColor: primaryDark,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    borderWidth: 2,
+    borderRadius: 5,
+    elevation: 5
+  },
+  infoDisabled: {
+    fontSize: 17,
+    width: '100%',
+    height: 40,
+    fontWeight: 'bold',
+    color: 'lightgrey',
+    backgroundColor: '#726a69',
+    borderColor: 'grey',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    borderWidth: 2,
+    borderRadius: 5,
+    elevation: 5
+  },
   image: {
     width: '100%',
     height: 100,
+    borderRadius: 5,
     marginBottom: 20
   },
   divider: {
@@ -46,41 +87,56 @@ export default StyleSheet.create({
     elevation: 1
   },
   detailsContainer: {
-    padding: 20,
     width:windowWidth*0.96,
     height:windowHeight*0.41,
     position:'absolute',
     bottom: 0,
     alignSelf: 'center',
-    backgroundColor: 'white',
+    backgroundColor: secondaryLight,
+    borderColor: primaryDark,
+    borderWidth: 2,
     borderTopStartRadius: 10,
     borderTopEndRadius: 10,
-    shadowColor: 'black',
-    shadowOpacity: 0.8,
-    shadowOffset: {width: 2, height: 5},
-    elevation: 1
+    elevation: 10
   },
   detailsTitle: {
     alignSelf: "flex-start",
-    fontSize: 15,
-    fontWeight: "bold"
+    fontSize: 17,
+    marginLeft: 15,
+    marginTop: 3,
+    marginBottom: 2,
+    color: 'white',
+    fontWeight: "bold",
+    width: '80%'
+  },
+  titleContainer: {
+    paddingVertical: 10,
+    borderBottomColor: primaryDark,
+    borderBottomWidth: 2,
+    marginBottom: 10,
+    borderTopStartRadius: 8,
+    borderTopEndRadius: 8,
+    backgroundColor: primaryLight,
+    elevation: 3
   },
   filtersContainer: {
-    padding: 20,
     width:windowWidth*0.96,
     height:windowHeight*0.5,
     position:'absolute',
     bottom: 0,
+    borderColor: primaryDark,
+    borderWidth: 2,
     alignSelf: 'center',
-    backgroundColor: 'white',
+    elevation: 10,
+    backgroundColor: secondaryLight,
     borderTopStartRadius: 10,
     borderTopEndRadius: 10
   },
   filtersTitle: {
     alignSelf: 'center',
-    fontSize: 20,
-    fontFamily: 'robotto',
-    color: 'black',
+    color: 'white',
+    fontSize: 22,
+    fontWeight: 'bold'
   },
   picker: {
     height: 45, 
@@ -92,7 +148,7 @@ export default StyleSheet.create({
   closeFiltersButton: {
     alignSelf: 'flex-end',
     position: 'absolute',
-    marginTop: 11,
+    marginTop: 7,
     right: 15,
     width: 30,
     height: 30,

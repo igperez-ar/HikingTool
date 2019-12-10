@@ -191,6 +191,7 @@ const Drawer = createDrawerNavigator(
   {
     contentComponent: SideMenu,
     drawerWidth: Dimensions.get('window').width - 70, 
+    drawerBackgroundColor: 'transparent'
   },
 );
 

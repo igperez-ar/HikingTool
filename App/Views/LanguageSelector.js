@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   Alert, 
   View, 
-  StyleSheet, 
   TouchableOpacity, 
   Text 
 } from 'react-native';
@@ -11,7 +10,7 @@ import I18n from '../I18n/i18n';
 import SettingsActions from '../Redux/SettingsRedux';
 import { connect } from 'react-redux';
 
-/* import LanguageListItem from '../Components/LanguageListItem'; */
+import styles from './Styles/LanguageStyles';
 
 const languages = [
   {
@@ -52,13 +51,10 @@ class LanguageSelector extends React.Component {
   }
 
   render() {
-    /* console.warn(this.props) */
-    /* const currentLocale = this.props.navigation.getParam('currentLocale'); */
     const currentLocale = this.props.language;
 
     return (
-
-      <View style={{ marginTop: 15 }}>
+      <View style={styles.container}>
         {
           languages.map((language) => (
             <TouchableOpacity
@@ -93,31 +89,6 @@ class LanguageSelector extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  listItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    alignItems: 'center',
-    padding: 10
-  },
-  textWrapper: {
-    width: '90%',
-    marginLeft: 10
-  },
-  title: {
-    fontSize: 18,
-    color: '#434343'
-  },
-  subtitle: {
-    color: '#AAAAAA'
-  },
-  active: {
-    color: '#03a87c'
-  }
-});
-
-/* export default LanguageSelector; */
-
 const mapStateToProps = state => ({
   language: state.settings.language
 });
@@ -125,12 +96,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   change_language: (lang) => dispatch(SettingsActions.changeLanguage(lang))
 });
-/* 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    change_language: (lang) => { dispatch(SettingsActions.changeLanguage({language: lang}))}
-  }
-} */
 
 export default connect(
   mapStateToProps,

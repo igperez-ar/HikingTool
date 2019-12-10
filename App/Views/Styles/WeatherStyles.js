@@ -1,8 +1,16 @@
 import { StyleSheet } from 'react-native'
+import { secondaryLight } from '../../global.styles';
 
 export default StyleSheet.create({
     container: {
-      flex: 1
+      flex: 1,
+      backgroundColor: secondaryLight,
+    },
+    card: {
+      backgroundColor: 'rgba(255, 255, 255, 0.7)', 
+      marginVertical:3,
+      borderRadius: 10,
+      paddingHorizontal: 5
     },
     titulo: {
       fontSize: 28,
@@ -11,7 +19,6 @@ export default StyleSheet.create({
       padding: 10,
       fontWeight: 'bold',
     },
-    //Estilos del clima
     nextDays: {
       flex: 1,
       padding: 10,

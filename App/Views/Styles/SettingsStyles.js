@@ -1,11 +1,15 @@
 import { StyleSheet } from 'react-native'
+import { secondaryLight } from '../../global.styles';
 
 export default StyleSheet.create({
-    view: {
-      flex: 1
+    container: {
+      backgroundColor: secondaryLight
     },
-    button: {
-      width: 100,
-      textAlign: "left"
+    listitem: {
+      height: 60,
+      backgroundColor: 'rgba(255,255,255,0.4)',
+      borderColor: 'darkgrey',
+      borderBottomWidth: 1,
+      paddingHorizontal: 20      
     }
 })

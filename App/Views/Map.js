@@ -27,10 +27,11 @@ import SenderosEmergenciaGeoJSON from '../Jsons/senderos-emergencia-pn-tdf.json'
 /* import SenderosGeoJSON from '../Jsons/newtrails-pn-tdf.json'; */
 import PuntosInteresGeoJSON from '../Jsons/puntos-interes-pn-tdf.json';
 import MapboxGL from "@react-native-mapbox-gl/maps";
+import { primaryDark, primary, primaryLight, secondaryDark, secondaryLight } from '../global.styles';
 MapboxGL.setAccessToken("pk.eyJ1Ijoic2VuZGVyb3MiLCJhIjoiY2swdmR3OGgzMHk0ODNtcXM5ZzVzbng1aSJ9.aPqBLjTycTdR-4gMbpSM8w");
 
 //Deshabilita Warnings
-console.disableYellowBox = true;
+/* console.disableYellowBox = true; */
 
 var updateLocation = 0
 
@@ -49,7 +50,7 @@ class Map extends Component {
       showEmergencyTrails: false,
       showInterestPoints: true,
       showCard: false,
-      cardData: null,
+      cardData: {},
       showFilters: false,
       trail: 0,
       layer: 0
@@ -135,59 +136,70 @@ class Map extends Component {
   }
 
   renderCard() {
-
     const { navigate } = this.props.navigation;
+    const cardProps = this.state.cardData.properties;
+
     if (this.state.showCard)
-      if ("State" in this.state.cardData.properties) {
+      if ("State" in cardProps) {
         return ( 
           <View animation="slideInUp" style={styles.detailsContainer}>
-            <TouchableOpacity
-              style={styles.closeFiltersButton}
-              hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
-              onPress={this.onCloseBtnPress}
-            >
-              <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
-            </TouchableOpacity> 
-            
-            <Text style={styles.detailsTitle}>
-              {this.state.cardData.properties.Name}
-            </Text>
-            <Divider style={styles.divider}/>
-            <FastImage style={styles.image} 
-                      source={{priority: FastImage.priority.high},
-                      this.state.cardData.properties.photo}
-            />
-            <Button 
-              title={I18n.t('moreInfo')}
-              disabled={this.state.cardData.properties.State == "visitado" ? false : true }
-              onPress={ () => navigate('interestPoint', {point: this.state.cardData.properties.id -1})}
-            />
+            <View style={styles.titleContainer}>
+              <TouchableOpacity
+                style={styles.closeFiltersButton}
+                hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+                onPress={this.onCloseBtnPress}
+              >
+                <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
+              </TouchableOpacity> 
+
+              <Text numberOfLines={1} ellipsizeMode='tail' style={styles.detailsTitle}>
+                {cardProps.Name}
+              </Text>
+            </View>
+
+            <View style={{paddingHorizontal:20}}>
+              <FastImage style={styles.image} 
+                        source={{priority: FastImage.priority.high},
+                        cardProps.photo}
+              />
+              <TouchableOpacity
+                onPress={ () => navigate('interestPoint', {point: cardProps.id -1}) }
+                disabled={cardProps.State == "visitado" ? false : true }
+              >
+                <Text style={(cardProps.State == "visitado" ? styles.info : styles.infoDisabled)}>{I18n.t('info')}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         );
       } 
       else {
         return ( 
           <View animation="slideInUp" style={styles.detailsContainer}>
-            <TouchableOpacity
-              style={styles.closeFiltersButton}
-              hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
-              onPress={this.onFiltersBtnPress}
-            >
-              <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
-            </TouchableOpacity> 
-            
-            <Text style={styles.detailsTitle}>
-              {this.state.cardData.properties.name}
-            </Text>
-            <Divider style={styles.divider}/>
-            <Image
-              style={styles.image}
-              source={{uri: this.state.cardData.properties.images}}
-            />
-            <Button 
-              title={I18n.t('moreInfo')}
-              onPress={ () => navigate('trail', {trail: this.state.cardData.properties.id -1})}
-            />
+            <View style={styles.titleContainer}>
+              <TouchableOpacity
+                style={styles.closeFiltersButton}
+                hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+                onPress={this.onCloseBtnPress}
+              >
+                <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
+              </TouchableOpacity> 
+              
+              <Text numberOfLines={1} ellipsizeMode='tail' style={styles.detailsTitle}>
+                {cardProps.name}
+              </Text>
+            </View>
+
+            <View style={{paddingHorizontal:20}}>
+              <Image
+                style={styles.image}
+                source={{uri: cardProps.images}}
+              />
+              <TouchableOpacity
+                onPress={ () => navigate('trail', {trail: cardProps.id -1}) }
+              >
+                <Text style={styles.info}>{I18n.t('info')}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         );
       }
@@ -198,24 +210,26 @@ class Map extends Component {
     if (this.state.showFilters)
       return (
           <View style={styles.filtersContainer}>
-            <TouchableOpacity
-              style={styles.closeFiltersButton}
-              hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
-              onPress={this.onFiltersBtnPress}
-            >
-              <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
-            </TouchableOpacity>
-            <Text style={styles.filtersTitle}>Filtros</Text>
-            <Divider style={styles.divider}/>
+            <View style={styles.titleContainer}>
+              <TouchableOpacity
+                style={styles.closeFiltersButton}
+                hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+                onPress={this.onFiltersBtnPress}
+              >
+                <OptionIcon name="md-close" style={{ fontSize: 35 }}/>
+              </TouchableOpacity>
+              <Text style={styles.filtersTitle}>{I18n.t("filters")}</Text>
+            </View>  
+
             <View style={{alignSelf: "center", paddingVertical:4}}>
-              <Text>Senderos:</Text>
+              <Text style={{fontWeight:'bold'}}>{I18n.t("trails")}:</Text>
               <View style={styles.picker}>
                 <Picker
                   selectedValue={this.state.trail}
                   onValueChange={(itemValue) =>
                     this.setState({showTrails: true, trail: itemValue})
                   }>
-                  <Picker.Item label="Todos" value={0} />
+                  <Picker.Item label={I18n.t("all")} value={0}/>
                   {
                     SenderosGeoJSON.features.map((item) =>{
                       return(
@@ -225,19 +239,20 @@ class Map extends Component {
                   }
                 </Picker>
               </View>
-              <Text style={{paddingTop: 20}}>Capas:</Text>
+              <Text style={{paddingTop:20, fontWeight:'bold'}}>{I18n.t("layers")}:</Text>
               <View style={styles.picker}>
                 <Picker
                   selectedValue={this.state.layer}
                   onValueChange={(itemValue) => this.updateLayers(itemValue)}>
-                  <Picker.Item label="Todas" value={0}/>
-                  <Picker.Item label="Senderos" value={1}/>
-                  <Picker.Item label="Puntos de Interes" value={2}/>
+                  <Picker.Item label={I18n.t("all")} value={0}/>
+                  <Picker.Item label={I18n.t("trails")} value={1}/>
+                  <Picker.Item label={I18n.t("interestPoints")} value={2}/>
                 </Picker>
               </View>
               <CheckBox
-                containerStyle={{alignSelf: 'center', width: '100%', marginTop:10}}
-                title='Senderos de emergencia'
+                containerStyle={styles.emergency}
+                title={I18n.t("emergencyTrails")}
+                uncheckedColor="grey"
                 checked={this.state.showEmergencyTrails}
                 onPress={() => this.setState({showEmergencyTrails: !this.state.showEmergencyTrails})}
               />
@@ -283,7 +298,7 @@ class Map extends Component {
             >
               <MapboxGL.LineLayer
                 id="senderos-pn-tdf"
-                style={{ lineColor: 'brown', lineWidth: 3, visibility: this.state.showTrails ? 'visible' : 'none' }}
+                style={{ lineColor: primary, lineWidth: 3, visibility: this.state.showTrails ? 'visible' : 'none' }}
                 filter={this.state.trail == 0 ? ['all'] : ['==', 'id', this.state.trail]}
               />
             </MapboxGL.ShapeSource>
@@ -293,7 +308,7 @@ class Map extends Component {
             >
               <MapboxGL.LineLayer
                 id="senderos-emergencia-pn-tdf"
-                style={{ lineColor: 'purple', lineWidth: 3, visibility: this.state.showEmergencyTrails ? 'visible' : 'none' }}
+                style={{ lineColor: primaryDark, lineWidth: 3, visibility: this.state.showEmergencyTrails ? 'visible' : 'none' }}
               />
             </MapboxGL.ShapeSource>
             <MapboxGL.ShapeSource 
@@ -326,7 +341,7 @@ class Map extends Component {
                                                    this.state.showCard ? 250 : 15}]}
                                                    onPress={this.onFiltersBtnPress}
           >
-            <OptionIcon name="md-options" style={{ fontSize: 35 }}/>
+            <OptionIcon name="md-options" style={{ fontSize: 35 }} color={primaryDark}/>
           </TouchableOpacity>
 
           {this.renderCard()}

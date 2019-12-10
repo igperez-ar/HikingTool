@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
+import { secondaryLight, primaryDark, secondaryDark } from '../../global.styles';
 
 export default StyleSheet.create({
     container: {
@@ -8,25 +9,45 @@ export default StyleSheet.create({
     },
     inputContainer: {
       position: 'absolute',
-      backgroundColor: '#fff',
+      backgroundColor: secondaryLight,
       borderRadius: 5,
+      borderColor: primaryDark,
+      borderWidth: 2,
+      paddingHorizontal: 5,
       alignSelf: 'center',
       width: Dimensions.get('window').width * 0.9,
       bottom: 10
     },
     buttonOK: {
+      marginRight: 2,
       height: 40,
       borderRadius: 5,
-      backgroundColor: '#0074D9',
-      borderColor:'rgba(0,0,0,0.2)',
-      borderWidth:1
+      backgroundColor: primaryDark,
+      borderColor: primaryDark,
+      borderWidth:1,
+      elevation: 5
     },
     buttonCancel: {
+      marginLeft: 2,
       height: 40,
       borderRadius: 5,
-      backgroundColor: '#FF4136',
-      borderColor:'rgba(0,0,0,0.2)',
-      borderWidth:1
+      backgroundColor: 'grey',
+      borderColor: primaryDark,
+      borderWidth: 1,
+      elevation: 5
+    },
+    picCard: {
+      margin: 5,
+      borderRadius: 5,
+      width: Dimensions.get('window').width - 200,
+      height: 180
+    },
+    textButton : { 
+      fontSize: 15, 
+      fontWeight: 'bold',
+      color: 'white',
+      textAlign:'center', 
+      marginTop: 7
     },
     picture: {
       position: 'absolute',
@@ -35,13 +56,13 @@ export default StyleSheet.create({
       bottom: 0,
     },
     input: {
-      borderBottomColor: '#000000',
-      borderRightColor: '#000000',
-      borderRightWidth: 1,
-      borderBottomWidth: 1,
-      borderBottomRightRadius: 5,
+      backgroundColor: 'rgba(255,255,255,0.8)',
+      borderColor: primaryDark,
+      borderWidth: 1,
+      borderBottomRightRadius: 20,
       height: 50,
-      paddingLeft: 6
+      marginBottom: 5,
+      elevation: 2
     },
     preview: {
       flex: 1,
@@ -50,12 +71,16 @@ export default StyleSheet.create({
     },
     capture: {
       flex: 0,
-      backgroundColor: '#fff',
-      borderRadius: 5,
-      padding: 15,
-      paddingHorizontal: 20,
+      backgroundColor: secondaryLight,
+      borderTopStartRadius: 100,
+      borderTopEndRadius: 100,
+      width: 100,
+      paddingTop: 15,
+      paddingBottom: 7,
+      borderColor: primaryDark,
+      borderWidth: 2,
       alignSelf: 'center',
-      margin: 20,
+      alignItems: 'center'
     },
     cancel: {
       position: 'absolute',

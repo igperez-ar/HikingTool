@@ -4,38 +4,62 @@ import {
   View, 
   ScrollView,
   Image, 
-  ImageBackground
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native';
 
 import { Divider } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Ionicons';
 import FastImage from 'react-native-fast-image';
+import I18n from '../I18n/i18n';
 
-import weatherJSON from '../Jsons/weather-data.json';
+import WeatherActions from '../Redux/WeatherRedux';
+import { connect } from 'react-redux';
 
 import weatherIcons from '../Images/Icons/WeatherIcons';
 import styles from './Styles/WeatherStyles';
+import { primaryDark, secondaryLight } from '../global.styles.js';
 
 class Weather extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: (
+        <TouchableOpacity
+          hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+          onPress={navigation.getParam('updateWeather')}
+        >
+          <Icon
+            name="md-refresh"
+            style={{ fontSize: 30, color: 'white', marginRight:25 }}
+          />
+        </TouchableOpacity>
+      ),
+    };
+  };
+
+  _updateWeather = () => {
+    this.props.requestAPI();
+  };
+  
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
       currentDayTime: '',
-      currentDay: {},
-      nextDays: []
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    /* Esto permite que el boton del toolbar ejecute la función para actualizar la info */
+    this.props.navigation.setParams({ updateWeather: this._updateWeather });
 
     //Precargar iconos
-    const uris = []
+    const uris = [];
     for (var key in weatherIcons) {
       uris.push({
         uri: Image.resolveAssetSource(weatherIcons[key]).uri
-      })
-    }
+      });
+    };
     FastImage.preload(uris);
 
     //'Day' y 'Night' son dos valores necesarios para acceder a los datos.
@@ -43,161 +67,132 @@ class Weather extends Component {
     if (new Date().getHours() >= 6 && (new Date().getHours() < 21)) {
       this.setState({
         currentDayTime: 'Day'
-      })
+      });
     } else {
       this.setState({
         currentDayTime: 'Night'
-      })
-    }
-    this.setState({
-      currentDay: weatherJSON.DailyForecasts[0],
-      nextDays: [
-        weatherJSON.DailyForecasts[1], 
-        weatherJSON.DailyForecasts[2],
-        weatherJSON.DailyForecasts[3],
-        weatherJSON.DailyForecasts[4]
-      ],
-      isLoading: false
-    })
+      });
+    };
   }
 
   render () {
+    const { nextDays, currentDay, date } = this.props;
 
-    if (this.state.isLoading) {
-      return null
+    if ((Object.keys(currentDay).length == 0) && (nextDays.length == 0)) {
+      return (
+        <View style={{flex: 1, paddingTop: 50, backgroundColor: secondaryLight}}>
+          <ActivityIndicator size='large'/>
+        </View>
+      )
     } else {
       return (
-        <View style={{flex:1, backgroundColor: 'rgba(145, 200, 210, 0.6)'}}>
-        {/* <ImageBackground
-          source={require('../Images/partly-cloudy.jpg')}
-          imageStyle={{resizeMode: "cover", opacity:1}}
-          style={{width: '100%', height: '100%'}}
-        > */}
-          <View style={styles.container}>
-            <ScrollView>
-              <View style={{ padding: 10 }}>
-                <View style={[styles.actualDay, {backgroundColor: 'rgba(255, 255, 255, 0.8)', marginBottom:3}]}>
-                  <View style={{ padding: 10 }}>
-                    <Text style={styles.titulo}>Ushuaia, TDF</Text>
-                    <Divider style={{ backgroundColor: 'grey', height: 2, marginBottom: 20 }} />
-                    <View style={[styles.rowContainer, {paddingHorizontal:30, marginBottom:10}]}>
-                      <View style={{marginLeft:30}}>
-                        <Text style={styles.max}>{Math.round((((this.state.currentDay.Temperature.Maximum.Value)-32)*(5/9))*10)/10}°C</Text>
-                        <Text style={styles.min}>{Math.round((((this.state.currentDay.Temperature.Minimum.Value)-32)*(5/9))*10)/10}°C</Text>
-                      </View>
-                      <FastImage style={{ width: 90, height: 90 }} 
-                              source={{priority: FastImage.priority.high},
-                              weatherIcons[this.state.currentDay[this.state.currentDayTime].Icon]}/>
-                      {/* <View style={{alignItems: 'center'}}>
-                      </View> */}
-                    </View>  
-                    <Text style={{ alignSelf: 'center', fontStyle: 'italic', marginBottom: 15 }}>{this.state.currentDay.Night.ShortPhrase}</Text>
-                    <View style={styles.infoRows}>
-                      <Text style={{color:'black'}}>Wind:</Text>
-                      <Text style={{color: 'black'}}>{this.state.currentDay.Night.Wind.Speed.Value}mi/h {this.state.currentDay.Night.Wind.Direction.English}</Text>
+        <View style={styles.container}>
+          <ScrollView>
+            <View style={{ padding:10 }}>
+              <View style={styles.card}>
+
+                <View style={{ padding:10 }}>
+                  <Text style={styles.titulo}>Ushuaia, TDF</Text>
+                  <Divider style={{ backgroundColor: primaryDark, height:2, marginBottom:10 }} />
+                  <Text style={{textAlign:"center", marginBottom:15, fontSize:16}}>{date.day} {I18n.t("of")} {I18n.t(date.month)} {date.hour}:{date.minutes}</Text>
+                  <View style={[styles.rowContainer, {paddingHorizontal:30, marginBottom:10}]}>
+                    <View style={{marginLeft:30}}>
+                      <Text style={styles.max}>{Math.round((((currentDay.Temperature.Maximum.Value)-32)*(5/9))*10)/10}°C</Text>
+                      <Text style={styles.min}>{Math.round((((currentDay.Temperature.Minimum.Value)-32)*(5/9))*10)/10}°C</Text>
                     </View>
-                    <Divider style={{ height:1, marginBottom: 6}} />
-                    <View style={styles.infoRows}>
-                      <Text style={{color:'black'}}>Rain Probability:</Text>
-                      <Text style={{color: 'black'}}>{this.state.currentDay.Night.RainProbability}%</Text>
-                    </View>
-                    <Divider style={{ height:1, marginBottom: 6}} />
-                    <View style={styles.infoRows}>
-                      <Text style={{color:'black'}}>Snow Probability:</Text>
-                      <Text style={{color: 'black'}}>{this.state.currentDay.Night.SnowProbability}%</Text>
-                    </View>
-                    <Divider style={{ height:1, marginBottom: 6}} />
-                    <View style={styles.infoRows}>
-                      <Text style={{color:'black'}}>Ice Probability:</Text>
-                      <Text style={{color: 'black'}}>{this.state.currentDay.Night.IceProbability}%</Text>
-                    </View>
-                    <Divider style={{ height:1, marginBottom: 6}} />
-                    <View style={styles.infoRows}>
-                      <Text style={{color:'black', marginTop:8}}>Real Feel Temp:</Text>
-                      <View style={{alignItems:"flex-end"}}>
-                        <Text style={{color: 'black'}}>{Math.round((((this.state.currentDay.RealFeelTemperature.Maximum.Value)-32)*(5/9))*10)/10}℃</Text>
-                        <Text style={{color: 'grey'}}>{Math.round((((this.state.currentDay.RealFeelTemperature.Minimum.Value)-32)*(5/9))*10)/10}℃</Text>
-                      </View>
+                    <FastImage style={{ width: 90, height: 90 }} 
+                            source={{priority: FastImage.priority.high},
+                            weatherIcons[currentDay[this.state.currentDayTime].Icon]}/>
+                  </View>  
+
+                  <Text style={{ alignSelf: 'center', fontStyle: 'italic', marginBottom: 15 }}>{currentDay.Night.ShortPhrase}</Text>
+                  <View style={styles.infoRows}>
+                    <Text style={{color:'black'}}>{I18n.t("wind")}:</Text>
+                    <Text style={{color: 'black'}}>{currentDay.Night.Wind.Speed.Value}mi/h {currentDay.Night.Wind.Direction.English}</Text>
+                  </View>
+                  <Divider style={{backgroundColor: primaryDark, height:1, marginBottom: 6}} />
+                  
+                  <View style={styles.infoRows}>
+                    <Text style={{color:'black'}}>{I18n.t("rainProb")}:</Text>
+                    <Text style={{color: 'black'}}>{currentDay.Night.RainProbability}%</Text>
+                  </View>
+                  <Divider style={{backgroundColor: primaryDark, height:1, marginBottom: 6}} />
+
+                  <View style={styles.infoRows}>
+                    <Text style={{color:'black'}}>{I18n.t("snowProb")}:</Text>
+                    <Text style={{color: 'black'}}>{currentDay.Night.SnowProbability}%</Text>
+                  </View>
+                  <Divider style={{backgroundColor: primaryDark, height:1, marginBottom: 6}} />
+
+                  <View style={styles.infoRows}>
+                    <Text style={{color:'black'}}>{I18n.t("iceProb")}:</Text>
+                    <Text style={{color: 'black'}}>{currentDay.Night.IceProbability}%</Text>
+                  </View>
+                  <Divider style={{backgroundColor: primaryDark, height:1, marginBottom: 6}} />
+
+                  <View style={styles.infoRows}>
+                    <Text style={{color:'black', marginTop:8}}>{I18n.t("realFeel")}:</Text>
+                    <View style={{alignItems:"flex-end"}}>
+                      <Text style={{color: 'black'}}>{Math.round((((currentDay.RealFeelTemperature.Maximum.Value)-32)*(5/9))*10)/10}℃</Text>
+                      <Text style={{color: 'grey'}}>{Math.round((((currentDay.RealFeelTemperature.Minimum.Value)-32)*(5/9))*10)/10}℃</Text>
                     </View>
                   </View>
                 </View>
-                {/* <Divider style={{height:1, marginTop:10}}></Divider> */}
-                <View>
-                  {
-                    this.state.nextDays.map((item) =>{
-                      return(
-                      <View key={item.Date} style={{backgroundColor: 'rgba(255, 255, 255, 0.7)', marginVertical:3}}>
-                        <View style={styles.nextDays}>
-                          <View>
-                            <Text style={{ color: 'black', fontWeight: 'bold' }}>
-                              {item.Date.substring(5,7)}/{item.Date.substring(8,10)}
-                            </Text>
-                            <Text style={{color: 'grey'}}>
-                              {item.Day.IconPhrase}
-                            </Text>
-                          </View>  
-                          <View style={styles.rowContainer}>
-                            <FastImage style={{width: 30, height: 30, marginTop: 5, marginRight: 15}} 
-                                      source={{priority: FastImage.priority.high},
-                                      weatherIcons[item.Day.Icon]}
-                            />
-                            <View style={{ alignItems:"flex-end" }}>
-                              <Text style={{color: 'black'}}>{Math.round((((item.Temperature.Minimum.Value)-32)*(5/9))*10)/10}°</Text>
-                              <Text style={{color: 'grey'}}>{Math.round((((item.Temperature.Maximum.Value)-32)*(5/9))*10)/10}°</Text>
-                            </View>
-                          </View>  
-                        </View>
-                        {/* <Divider style={{height:1}}></Divider> */}
-                      </View>  
-                      );
-                    })
-                  }
-                </View>  
               </View>
-            </ScrollView>
-          </View>
-        {/* </ImageBackground> */}
-      </View>
+              <View>
+                {
+                  nextDays.map((item) =>{
+                    return(
+                    <View key={item.Date} style={styles.card}>
+                      <View style={styles.nextDays}>
+                        <View>
+                          <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                            {item.Date.substring(5,7)}/{item.Date.substring(8,10)}
+                          </Text>
+                          <Text style={{color: 'grey'}}>
+                            {I18n.t(item.Day.IconPhrase)}
+                          </Text>
+                        </View>  
+                        <View style={styles.rowContainer}>
+                          <FastImage style={{width: 30, height: 30, marginTop: 5, marginRight: 15}} 
+                                    source={{priority: FastImage.priority.high},
+                                    weatherIcons[item.Day.Icon]}
+                          />
+                          <View style={{alignItems:"flex-end", width:35 }}>
+                            <Text style={{color: 'black'}}>{Math.round((((item.Temperature.Minimum.Value)-32)*(5/9))*10)/10}°</Text>
+                            <Text style={{color: 'grey'}}>{Math.round((((item.Temperature.Maximum.Value)-32)*(5/9))*10)/10}°</Text>
+                          </View>
+                        </View>  
+                      </View>
+                    </View>  
+                    );
+                  })
+                }
+              </View>  
+            </View>
+          </ScrollView>
+        </View>
       )
     }
   }
 }
 
-export default Weather;
-
-
-/* import React, { Component } from 'react'
-import {
-  View
-} from 'react-native'
-
-class Weather extends Component {
-
-  render() {
-    return (
-      <View>
-    
-      </View>
-    );
+const mapStateToProps = (state) => {
+  return {
+    nextDays: state.weather.nextDays,
+    currentDay: state.weather.currentDay,
+    date: state.weather.date,
   }
 }
 
-export default Weather;
+//Se utiliza para pedir de la API la info y almacenarla en store.
+const mapDispatchToProps = (dispatch) => {
+  return {
+    requestAPI: () => { dispatch(WeatherActions.weatherRequest(null))}
+  }
+}
 
-                  <View key={item.Date} style={styles.nextDays}>
-                    <View style={styles.rowContainer}>
-                      <FastImage style={{width: 30, height: 30, marginTop: 10}} 
-                                source={{priority: FastImage.priority.high},
-                                weatherIcons[item.Day.Icon]}
-                      />
-                      <Text style={{marginLeft: 7, marginTop: 14, fontWeight: 'bold'}}>{item.Date.substring(5,7)}/{item.Date.substring(8,10)}</Text>
-                    </View>
-                    <View style={styles.rowNextDay}>
-                      <Text style={{color: '#0074D9'}}>{Math.round((((item.Temperature.Minimum.Value)-32)*(5/9))*10)/10}℃</Text>
-                      <Text style={{color: 'black'}}>  -  </Text>
-                      <Text style={{color: '#FF4136'}}>{Math.round((((item.Temperature.Maximum.Value)-32)*(5/9))*10)/10}℃</Text>
-                    </View>
-                  </View>
-
-
-*/
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(Weather);

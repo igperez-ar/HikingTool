@@ -1,22 +1,30 @@
 import { StyleSheet } from 'react-native';
+import { secondaryLight, primaryLight, secondaryDark, primary } from '../../global.styles';
 
 export default {
+  content: {
+    backgroundColor: secondaryLight,
+    elevation: 10,
+    borderBottomRightRadius: 90 
+  },
   header: {
     flexDirection: "column",
     /* paddingTop: 40, 24dp (Space for the translucent StatusBar) plus 16dp Android Header paddingTop
     paddingLeft: 16, */
-    height: 170,
-    backgroundColor: '#CFD8DC'
+    height: 160,
+    backgroundColor: '#CFD8DC',
+    marginBottom: 10,
+    elevation: 10
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.3)'
+    backgroundColor: 'rgba(90,90,90,0.45)'
   },
   title: {
-    marginTop: '34%',
+    marginTop: '30%',
     marginLeft: 5,
     fontSize: 50,
-    color: 'white',
+    color: 'transparent',
     fontFamily: 'serif'
   },
   image:{
@@ -36,31 +44,21 @@ export default {
     height: 56,
     paddingTop: 8
   },
-  drawerTitle: {
-    color: '#000',
-    fontFamily: "Roboto",
-    fontWeight: "500",
-    fontSize: 14
-  },
-  drawerEmail: {
-    color: '#000',
-    fontFamily: "Roboto",
-    fontWeight: "400",
-    fontSize: 14
-  },
   activeDrawerItem: {
-    backgroundColor: '#455A64'
+    backgroundColor: primary,
+    borderTopRightRadius: 50,
+    borderBottomRightRadius: 50,
+    elevation: 10
   },
   drawerItem: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: '#ffffff',
+    backgroundColor: 'transparent',
     color: '#000',
     height: 50,
-    paddingLeft: 16,
-    borderBottomWidth: 2,
-    borderBottomColor: "#fff"
+    width: '90%',
+    paddingLeft: 25
   },
   drawerItemLogo: {
     paddingRight: 16

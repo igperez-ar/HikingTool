@@ -1,36 +1,82 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { primary, primaryDark, secondaryLight, secondaryDark, primaryLight} from '../../global.styles'
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(145, 200, 210, 0.4)'
-  },
-  row: {
-    marginTop: 10
+    backgroundColor: secondaryLight
   },
   rowContent: {
     flexDirection: "row",
   },
   card: {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    elevation: 10,
-    padding: 20,
-    paddingTop: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    elevation: 2,
+    borderRadius: 10,
+    borderColor: primaryDark,
+    borderWidth: 1,
     marginBottom: 20,
-    marginHorizontal: 10,
+    marginHorizontal: 7,
     width: Dimensions.get('window').width - 120
   },
+  cardTitle: {
+    fontSize: 15,
+    color: 'white',
+    fontWeight: "bold"
+  },
+  cardTitleContainer: {
+    backgroundColor: primaryLight,
+    borderBottomColor: primaryDark,
+    borderBottomWidth: 1,
+    borderTopStartRadius: 9,
+    borderTopEndRadius: 9,
+    padding: 10
+  },
+  cardContent: {
+    alignItems: "center",
+    padding: 10
+  },
+  info: {
+    fontSize: 17,
+    width: '100%',
+    height: 40,
+    fontWeight: 'bold',
+    color: 'white',
+    backgroundColor: primaryDark,
+    borderColor: primaryDark,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    borderWidth: 2,
+    borderRadius: 5,
+    elevation: 5
+  },
+  infoDisabled: {
+    fontSize: 17,
+    width: '100%',
+    height: 40,
+    fontWeight: 'bold',
+    color: 'lightgrey',
+    backgroundColor: '#726a69',
+    borderColor: 'grey',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    borderWidth: 2,
+    borderRadius: 5,
+    elevation: 5
+  },
   especieCard: {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-    elevation: 10,
-    padding: 20,
-    paddingTop: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    marginBottom: 20,
-    marginHorizontal: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    borderColor: primaryDark,
+    borderWidth: 1,
+    elevation: 5,
+    borderRadius: 10,
+    marginBottom: 15,
     width: Dimensions.get('window').width - 30
+  },
+  especieContent: {
+    flexDirection: 'row', 
+    justifyContent:"space-between",
+    padding: 10,
+    paddingHorizontal: 20
   },
   especieImage: {
     width: 120,
@@ -39,43 +85,50 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderColor: "grey"
   },
-  title: {
-    marginTop: 5,
-    fontSize: 22,
-    alignSelf: "flex-start",
-    color: 'black',
-    fontWeight: 'bold'
-  },
   titleContainer: {
-    marginTop: 15,
+    marginTop: 25,
     marginBottom: 15,
-    marginLeft: 10,
-    /* borderBottomRightRadius: 50, */
-    borderTopRightRadius: 60,
-    width: Dimensions.get('window').width - 30
+    paddingVertical: 15,
+    backgroundColor: secondaryDark,
+    borderBottomRightRadius: 50,
+    borderTopRightRadius: 50,
+    paddingLeft: 15,
+    elevation: 5,
+    width: Dimensions.get('window').width - 20
   },
   subtitle2: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'black',
+    color: primary,
   },
   subtitle3: {
     fontSize: 14,
     color: 'black',
     marginTop: 10,
   },
-  cardTitle: {
-    fontSize: 14,
-    color: 'black',
-    marginTop: 5,
-    fontWeight: "bold"
+  importantTitle: {
+    textAlign: 'center',
+    marginTop: 15,
+    color: 'darkred',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  importantText: {
+    textAlign: "center",
+    fontSize: 15,
+    marginBottom: 10 
   },
   detailsContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     marginHorizontal: 10,
+    marginBottom: 20,
     paddingHorizontal: 15,
     paddingBottom: 10,
-    borderTopRightRadius: 50
+    borderRadius: 5,
+    borderTopRightRadius: 50,
+    borderColor: primaryDark,
+    borderWidth: 1,
+    elevation: 2
   },  
   button: {
     fontSize: 17,
@@ -88,17 +141,21 @@ export default StyleSheet.create({
     borderRadius: 5,
     textAlign: "center"
   },  
-  badge: {
-    position: "absolute",
-    width: 40,
-    height: 32,
-    borderRadius: 0,
-    borderBottomLeftRadius: 15,
-    top: -14,
-    left: -17
-  },
   text: {
     paddingHorizontal: 10
+  },
+  title: {
+    fontSize: 25,
+    marginBottom: 2,
+    color: primary,
+    textAlign: "center",
+    fontWeight: 'bold'
+  },
+  divider: {
+    height: 2,   
+    width: '80%', 
+    backgroundColor: primary,
+    elevation: 2
   },
   image: { 
     height: 200
