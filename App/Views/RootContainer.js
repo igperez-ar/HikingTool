@@ -17,6 +17,9 @@ import I18n from '../I18n/i18n';
 // Styles
 import styles from './Styles/RootContainerStyles';
 
+//Deshabilita Warnings
+console.disableYellowBox = true;
+
 class RootContainer extends Component {
 
   componentDidMount () {

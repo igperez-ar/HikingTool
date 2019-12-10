@@ -30,9 +30,6 @@ import MapboxGL from "@react-native-mapbox-gl/maps";
 import { primaryDark, primary, primaryLight, secondaryDark, secondaryLight } from '../global.styles';
 MapboxGL.setAccessToken("pk.eyJ1Ijoic2VuZGVyb3MiLCJhIjoiY2swdmR3OGgzMHk0ODNtcXM5ZzVzbng1aSJ9.aPqBLjTycTdR-4gMbpSM8w");
 
-//Deshabilita Warnings
-/* console.disableYellowBox = true; */
-
 var updateLocation = 0
 
 class Map extends Component {
