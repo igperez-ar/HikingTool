@@ -21,23 +21,13 @@ class About extends Component {
         </View>
 
         <Text style={styles.text}>
-          Como estudiantes de la carrera de Analistas en Sistemas en la UNTDF, surgió la posibilidad de 
-          realizar ésta aplicación como proyecto integrador de la materia Laboratorio de Software, 
-          en la cual se busca integrar los conocimientos adquiridos durante el transcurso de los 
-          últimos años para obtener la experiencia de un desarrollo de software profesional y también, 
-          llevar a cabo un sistema que resuelva una problemática real de la comunidad.
+          {I18n.t("aboutP1")}
         </Text>
         <Text style={styles.text}>
-          El motivo por el cual decidimos embarcarnos en este proyecto en particular fue, además 
-          de contribuir con las necesidades del parque y de considerarlo un desafío profesional, 
-          porque encontramos la posibilidad de enriquecer la experiencia de los visitantes. Creemos que 
-          es útil poder tener información del lugar en todo momento y también el hecho de contar con 
-          una herramienta que proteja a sus usuarios de posibles extravíos.
+          {I18n.t("aboutP2")}
         </Text> 
         <Text style={styles.text}>
-          Los usuarios a quienes está dirigida esta aplicación son principalmente los turistas. Ellos pueden 
-          descargar y utilizar posteriormente la aplicación off-line durante el transcurso de su estadía 
-          en el parque, teniendo a su disposición la totalidad de los servicios brindados. 
+          {I18n.t("aboutP3")} 
         </Text>
 
         <View style={styles.titleContainer}>
@@ -77,10 +67,10 @@ class About extends Component {
           <View style={styles.social}>
             <Icon name="logo-github" size={25} style={{marginRight:10}} />
             <Text onPress={() =>
-              Linking.openURL('https://github.com/damianlopez95')}
+              Linking.openURL('https://github.com/ignacioperez99')}
               style={styles.socialText}
             >
-              github.com/damianlopez95
+              github.com/ignacioperez99
             </Text>
           </View>
         </View>

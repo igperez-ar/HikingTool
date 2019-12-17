@@ -84,5 +84,10 @@
    "December": "December",
    "of": "of",
    "Rain": "Rain",
-   "Showers": "Showers"
+   "Showers": "Showers",
+   "aboutP1": "As students of the Systems Analyst career at the UNTDF, the possibility arose of carrying out this application as an integrating project of the Software Laboratory subject, in which it is sought to integrate the knowledge acquired during the last years to obtain the experience of a professional software development and also, to carry out a system that solves a real problem of the community.",
+   "aboutP2": "The reason why we decided to embark on this particular project was, in addition to contributing to the needs of the park and considering it a professional challenge, because we found the possibility of enriching the visitor experience. We believe it is useful to have information about the place at all times and also to have a tool that protects its users from possible loss.",
+   "aboutP3": "The users to whom this application is aimed are mainly tourists. They can download and subsequently use the application off-line during the course of their stay in the park, having at their disposal all the services provided.",
+   "importantP": "Remember, in case of Huemul sighting you must notify the Park staff.",
+   "descriptionP": "It is a beautiful waterfall of pure water, which in its immense flow forms a lagoon. Crossing the forest, the jump is on the last stretch of the Chorrillo River before it flows into the De las Vueltas River."
 }

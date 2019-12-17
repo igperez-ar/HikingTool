@@ -95,7 +95,7 @@ class Weather extends Component {
                   <Text style={styles.titulo}>Ushuaia, TDF</Text>
                   <Divider style={{ backgroundColor: primaryDark, height:2, marginBottom:10 }} />
                   <Text style={{textAlign:"center", marginBottom:15, fontSize:16}}>{date.day} {I18n.t("of")} {I18n.t(date.month)} {date.hour}:{date.minutes}</Text>
-                  <View style={[styles.rowContainer, {paddingHorizontal:30, marginBottom:10}]}>
+                  <View style={[styles.rowContainer, {paddingHorizontal:30, marginBottom:30}]}>
                     <View style={{marginLeft:30}}>
                       <Text style={styles.max}>{Math.round((((currentDay.Temperature.Maximum.Value)-32)*(5/9))*10)/10}°C</Text>
                       <Text style={styles.min}>{Math.round((((currentDay.Temperature.Minimum.Value)-32)*(5/9))*10)/10}°C</Text>
@@ -105,7 +105,7 @@ class Weather extends Component {
                             weatherIcons[currentDay[this.state.currentDayTime].Icon]}/>
                   </View>  
 
-                  <Text style={{ alignSelf: 'center', fontStyle: 'italic', marginBottom: 15 }}>{currentDay.Night.ShortPhrase}</Text>
+                  {/* <Text style={{ alignSelf: 'center', fontStyle: 'italic', marginBottom: 15 }}>{currentDay.Night.ShortPhrase}</Text> */}
                   <View style={styles.infoRows}>
                     <Text style={{color:'black'}}>{I18n.t("wind")}:</Text>
                     <Text style={{color: 'black'}}>{currentDay.Night.Wind.Speed.Value}mi/h {currentDay.Night.Wind.Direction.English}</Text>
@@ -145,14 +145,14 @@ class Weather extends Component {
                     return(
                     <View key={item.Date} style={styles.card}>
                       <View style={styles.nextDays}>
-                        <View>
-                          <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                        {/* <View> */}
+                          <Text style={{ color: 'black', fontWeight: 'bold', fontSize:15, textAlignVertical:"center" }}>
                             {item.Date.substring(5,7)}/{item.Date.substring(8,10)}
                           </Text>
-                          <Text style={{color: 'grey'}}>
+                          {/* <Text style={{color: 'grey'}}>
                             {I18n.t(item.Day.IconPhrase)}
-                          </Text>
-                        </View>  
+                          </Text> */}
+                        {/* </View>   */}
                         <View style={styles.rowContainer}>
                           <FastImage style={{width: 30, height: 30, marginTop: 5, marginRight: 15}} 
                                     source={{priority: FastImage.priority.high},

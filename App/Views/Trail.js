@@ -39,12 +39,12 @@ class Trail extends React.Component {
                 trail.important ? 
                   <View style={{textAlign:'center'}}>
                     <Text style={styles.importantTitle}>{I18n.t("important")}:</Text>
-                    <Text style={styles.importantText}>{trail.important}</Text>
+                    <Text style={styles.importantText}>{I18n.t("importantP")}</Text>
                   </View>  
                   : null
               }
               <Text style={styles.subtitle3}>{I18n.t("difficulty")}:</Text>
-              <Text>{trail.difficulty}</Text>
+              <Text>{I18n.t(trail.difficulty)}</Text>
               <Text style={styles.subtitle3}>{I18n.t("estTime")}:</Text>
               <Text>{trail.estimated_time}</Text>
               <Text style={styles.subtitle3}>{I18n.t("distance")}:</Text>
@@ -54,7 +54,7 @@ class Trail extends React.Component {
               <Text style={styles.subtitle3}>{I18n.t("selfGuided")}:</Text>
               <Text>{trail.selfguided ? I18n.t("yes") : I18n.t("no")}</Text>
               <Text style={styles.subtitle3}>{I18n.t("desc")}:</Text>
-              <Text style={{textAlign:'justify'}}>{trail.description}</Text>
+              <Text style={{textAlign:'justify'}}>{I18n.t("descriptionP")}</Text>
             </View>
 
             <View style={styles.titleContainer}>  

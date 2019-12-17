@@ -48,7 +48,7 @@ export default {
     backgroundColor: primary,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
-    elevation: 10
+    elevation: 5
   },
   drawerItem: {
     flexDirection: "row",
